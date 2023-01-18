@@ -1,0 +1,9 @@
+---
+version: "3"
+
+tasks:
+  init:
+    desc: Provision proxmox VMs for the cluster
+    dir: "{{.TERRAFORM_DIR}}"
+    cmds:
+      - op run --env-file=.env terraform apply

@@ -1,0 +1,6 @@
+---
+creation_rules:
+  - path_regex: .*\.sops\.ya?ml
+    unencrypted_regex: "^(kind)$"
+    age: >-
+      age1ksuvc69hvx8eup9g4g4m5lklhkmmmh4ddjdqfdsusaq50vu2846qu56ltl

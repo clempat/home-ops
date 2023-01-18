@@ -1,0 +1,18 @@
+---
+version: "3"
+
+vars:
+  TERRAFORM_DIR: "{{.ROOT_DIR}}/terraform"
+  ANSIBLE_DIR: "{{.ROOT_DIR}}/ansible"
+  CLUSTER_DIR: "{{.ROOT_DIR}}/kubernetes"
+
+env:
+  KUBECONFIG: "{{.ANSIBLE_DIR}}/kubernetes/kubeconfig"
+
+includes:
+  terraform: .taskfiles/TerraformTasks.yml
+
+tasks:
+  default:
+    silent: true
+    cmds: ["task -l"]
