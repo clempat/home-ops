@@ -19,5 +19,5 @@ I have a Proxmox server running, an API key with permission to PVEAdmin on '/' a
 
 I have as well on the workstation go-task, terraform, ansible and more installed.
 
-1. `task terraform:init`
-2. `task ansible:init`
+1. `task cluster:create` - Provide nodes on Proxmox
+2. `task cluster:prepare` - Install needs for cluster and k3s

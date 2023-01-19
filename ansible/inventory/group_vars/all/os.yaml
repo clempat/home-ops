@@ -1,0 +1,31 @@
+---
+timezone: Europe/Berlin
+public_ssh_keys:
+  - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFV7+yMdRps8qQex9xlYcntTFEJa6q6H7vDhAXYLWjHa clement@tuxedo"
+  - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBvKAiHEGGOxW+Y/quPifHli4LGfvcJJYTyp1r8kJ2/j clement@iphone"
+packages:
+  - apt-transport-https
+  - arptables
+  - ca-certificates
+  - curl
+  - ebtables
+  - hdparm
+  - htop
+  - intel-gpu-tools
+  - iputils-ping
+  - ipvsadm
+  - lm-sensors
+  - lvm2
+  - nano
+  - net-tools
+  - nfs-common
+  - nvme-cli
+  - open-iscsi
+  - psmisc
+  - python3-kubernetes
+  - python3-yaml
+  - qemu-guest-agent
+  - smartmontools
+  - socat
+  - software-properties-common
+  - unattended-upgrades

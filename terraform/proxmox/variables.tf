@@ -7,7 +7,7 @@ variable "proxmox_url" {
 }
 
 variable "cloudinit_template" {
-  default = "fedora-cloudinit-template"
+  default = "ubuntu-2004-cloudinit-template"
 }
 
 variable "target_node" {
