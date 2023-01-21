@@ -1,0 +1,4 @@
+yaml.schemas: {
+    "kubernetes": "kubernetes/**/*.yaml",
+    "https://json.schemastore.org/kustomization": "**/kustomization.yaml"
+}

@@ -9,14 +9,22 @@ tasks:
       - ansible-galaxy collection install -r requirements.yml --collections-path ~/.ansible/collections --force
     preconditions:
       - test -f "{{.ANSIBLE_DIR}}/requirements.yml"
+  networking:
+    desc: Provision network for Homelab
+    dir: "{{.TERRAFORM_DIR}}/unifi"
+    cmds:
+      - op run --env-file=.env terraform init
+      - op run --env-file=.env terraform apply
   create:
     desc: Provision proxmox VMs for the cluster
     dir: "{{.TERRAFORM_DIR}}/proxmox"
     cmds:
       - op run --env-file=.env terraform init
       - op run --env-file=.env terraform apply
-  prepare:
+  install:
     desc: Prepare the vms os
     dir: "{{.ANSIBLE_DIR}}"
     cmds:
       - ansible-playbook -i {{.ANSIBLE_DIR}}/inventory/hosts.yml {{.ANSIBLE_DIR}}/playbooks/cluster-prepare.yml
+      - ansible-playbook -i {{.ANSIBLE_DIR}}/inventory/hosts.yml {{.ANSIBLE_DIR}}/playbooks/cluster-install.yml
+      - kubectl apply --kubeconfig {{.ROOT_DIR}}/kubeconfig -k {{.CLUSTER_DIR}}/bootstrap/argocd

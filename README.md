@@ -20,4 +20,8 @@ I have a Proxmox server running, an API key with permission to PVEAdmin on '/' a
 I have as well on the workstation go-task, terraform, ansible and more installed.
 
 1. `task cluster:create` - Provide nodes on Proxmox
-2. `task cluster:prepare` - Install needs for cluster and k3s
+2. `task cluster:deps` - Install necessary dependancies
+3. `task cluster:Install` - Install needs for cluster and k3s
+4. `export KUBECONFIG=./kubeconfig`
+
+You can know check the nodes with `kubectl get nodes`
