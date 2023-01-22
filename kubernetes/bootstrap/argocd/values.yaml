@@ -1,0 +1,198 @@
+git:
+  name: homelab
+  url: https://github.com/clempat/home-ops
+
+secret:
+  name: helm-secrets-private-keys
+  age:
+    key: key.txt
+
+argo-cd:
+  global:
+    deploymentAnnotations:
+      reloader.stakater.com/auto: "true"
+    statefulsetAnnotations:
+      reloader.stakater.com/auto: "true"
+  configs:
+    cm:
+      exec.enabled: "true"
+      statusbadge.enabled: "true"
+      timeout.reconciliation: 0s
+      helm.valuesFileSchemes: >-
+        secrets+gpg-import, secrets+gpg-import-kubernetes,
+        secrets+age-import, secrets+age-import-kubernetes,
+        secrets,secrets+literal,
+        https
+  server:
+    extraArgs:
+      - --insecure
+    ingress:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        hajimari.io/enable: "true"
+        hajimari.io/icon: robot
+        hajimari.io/appName: ArgoCD
+        hajimari.io/info: Declarative, GitOps continuous delivery tool for Kubernetes
+    metrics: &metrics
+      enabled: true
+      serviceMonitor:
+        enabled: true
+        annotations:
+          argo: stop-reconciling
+  dex:
+    enabled: false
+  controller:
+    metrics: *metrics
+  repoServer:
+    metrics: *metrics
+    rbac:
+      - apiGroups:
+          - ""
+        resources:
+          - secrets
+        verbs:
+          - get
+    env:
+      - name: HELM_PLUGINS
+        value: /custom-tools/helm-plugins/
+      - name: HELM_SECRETS_SOPS_PATH
+        value: /custom-tools/sops
+      - name: HELM_SECRETS_KUBECTL_PATH
+        value: /custom-tools/kubectl
+      - name: HELM_SECRETS_CURL_PATH
+        value: /custom-tools/curl
+      - name: HELM_SECRETS_VALUES_ALLOW_SYMLINKS
+        value: "false"
+      - name: HELM_SECRETS_VALUES_ALLOW_ABSOLUTE_PATH
+        value: "false"
+      - name: HELM_SECRETS_VALUES_ALLOW_PATH_TRAVERSAL
+        value: "false"
+      - name: HELM_SECRETS_IGNORE_MISSING_VALUES
+        value: "true"
+    volumes:
+      - name: custom-tools
+        emptyDir: {}
+      - name: helm-secrets-private-keys
+        secret:
+          secretName: helm-secrets-private-keys
+
+    volumeMounts:
+      - mountPath: /custom-tools
+        name: custom-tools
+      - mountPath: /helm-secrets-private-keys/
+        name: helm-secrets-private-keys
+
+    initContainers:
+      - name: download-tools
+        image: ubuntu:22.04
+        command:
+          - /bin/bash
+          - -c
+          - |
+            DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y wget
+            mkdir -p /custom-tools/helm-plugins
+            wget -qO- https://github.com/jkroepke/helm-secrets/releases/download/${HELM_SECRETS_VERSION}/helm-secrets.tar.gz | tar -C /custom-tools/helm-plugins -xzf-
+            wget -qO /custom-tools/sops https://github.com/mozilla/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux
+            wget -qO /custom-tools/kubectl https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl
+            chmod +x /custom-tools/*
+
+        env:
+          - name: HELM_SECRETS_VERSION
+            # renovate: datasource=github-releases depName=jkroepke/helm-secrets
+            value: "v4.2.2"
+          - name: KUBECTL_VERSION
+            # renovate: datasource=github-releases depName=kubernetes/kubernetes
+            value: "v1.26.0"
+          - name: SOPS_VERSION
+            # renovate: datasource=github-releases depName=mozilla/sops
+            value: "v3.7.3"
+        volumeMounts:
+          - mountPath: /custom-tools
+            name: custom-tools
+  redis:
+    metrics: *metrics
+
+  notifications:
+    metrics: *metrics
+    secret:
+      create: false
+
+    notifiers:
+      service.email.pushover: |
+        username: $email-username
+        password: $email-password
+        host: $email-hostname
+        port: 465
+        from: $email-from
+
+    triggers:
+      trigger.on-deployed: |
+        - description: Application is synced and healthy. Triggered once per commit.
+          oncePer: app.status.sync.revision
+          send:
+          - app-deployed
+          when: app.status.operationState.phase in ['Succeeded'] and app.status.health.status == 'Healthy'
+      trigger.on-health-degraded: |
+        - description: Application has degraded
+          send:
+          - app-health-degraded
+          when: app.status.health.status == 'Degraded'
+      trigger.on-sync-failed: |
+        - description: Application syncing has failed
+          send:
+          - app-sync-failed
+          when: app.status.operationState.phase in ['Error', 'Failed']
+      trigger.on-sync-status-unknown: |
+        - description: Application status is 'Unknown'
+          send:
+          - app-sync-status-unknown
+          when: app.status.sync.status == 'Unknown'
+      defaultTriggers: |
+        - on-deployed
+        - on-health-degraded
+        - on-sync-failed
+        - on-sync-status-unknown
+    templates:
+      template.app-deployed: |
+        email:
+          subject: New version of an application {{.app.metadata.name}} is up and running.
+        message: |
+          {{if eq .serviceType "slack"}}:white_check_mark:{{end}} Application {{.app.metadata.name}} is now running new version of deployments manifests.
+        github:
+          status:
+            state: success
+            label: "ArgoCD app={{.app.metadata.name}}"
+      template.app-health-degraded: |
+        email:
+          subject: Application {{.app.metadata.name}} has degraded.
+        message: |
+          {{if eq .serviceType "slack"}}:exclamation:{{end}} Application {{.app.metadata.name}} has degraded.
+          {{if ne .serviceType "github"}}Application details: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}.{{end}}
+        github:
+          status:
+            state: error
+            label: "ArgoCD app={{.app.metadata.name}}"
+      template.app-sync-failed: |
+        email:
+          subject: Failed to sync application {{.app.metadata.name}}.
+        message: |
+          {{if eq .serviceType "slack"}}:exclamation:{{end}}  The sync operation of application {{.app.metadata.name}} has failed at {{.app.status.operationState.finishedAt}} with the following error: {{.app.status.operationState.message}}
+          {{if ne .serviceType "github"}}Sync operation details are available at: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true .{{end}}
+        github:
+          status:
+            state: error
+            label: "ArgoCD app={{.app.metadata.name}}"
+      template.app-sync-status-unknown: |
+        email:
+          subject: Application {{.app.metadata.name}} sync status is 'Unknown'
+        message: |
+          {{if eq .serviceType "slack"}}:exclamation:{{end}} Application {{.app.metadata.name}} sync is 'Unknown'.
+          Application details: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}.
+          {{if ne .serviceType "slack"}}
+          {{range $c := .app.status.conditions}}
+              * {{$c.message}}
+          {{end}}
+          {{end}}

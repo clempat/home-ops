@@ -27,4 +27,13 @@ tasks:
     cmds:
       - ansible-playbook -i {{.ANSIBLE_DIR}}/inventory/hosts.yml {{.ANSIBLE_DIR}}/playbooks/cluster-prepare.yml
       - ansible-playbook -i {{.ANSIBLE_DIR}}/inventory/hosts.yml {{.ANSIBLE_DIR}}/playbooks/cluster-install.yml
-      - kubectl apply --kubeconfig {{.ROOT_DIR}}/kubeconfig -k {{.CLUSTER_DIR}}/bootstrap/argocd
+
+  bootstrap:
+    desc: bootstrap k8s apps
+    dir: "{{.ROOT_DIR}}"
+    env:
+      KUBECONFIG: "{{.ROOT_DIR}}/kubeconfig"
+    cmds:
+      - kubectl create namespace argocd --dry-run=client --output=yaml | kubectl apply -f -
+      - cd {{.KUBERNETES_DIR}}/bootstrap/argocd && ./apply.sh
+      - cd {{.KUBERNETES_DIR}}/bootstrap/app-of-apps && ./apply.sh

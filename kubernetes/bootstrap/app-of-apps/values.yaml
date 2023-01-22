@@ -1,0 +1,11 @@
+gitops:
+  repo: https://github.com/clempat/home-ops
+  revision: main
+  secretName: helm-secrets-private-keys#key.txt?secrets.sops.yaml
+
+apps:
+  - name: argocd
+    path: kubernetes/bootstrap
+  - name: app-of-apps
+    path: kubernetes/bootstrap
+    namespace: argocd
