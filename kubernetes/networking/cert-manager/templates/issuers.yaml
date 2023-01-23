@@ -15,7 +15,7 @@ spec:
             email: clement.patout@gmail.com
             apiKeySecretRef:
               name: cloudflare-secret
-              key: ORIGIN_API_KEY
+              key: GLOBAL_API_KEY
         selector:
           dnsZones:
             - {{ .Values.homelab_domain }}
@@ -36,7 +36,7 @@ spec:
             email: clement.patout@gmail.com
             apiKeySecretRef:
               name: cloudflare-secret
-              key: ORIGIN_API_KEY
+              key: GLOBAL_API_KEY
         selector:
           dnsZones:
             - {{ .Values.homelab_domain }}
