@@ -8,7 +8,7 @@ spec:
     - "*.{{ .Values.homelab_domain }}"
   secretName: *name
   issuerRef:
-    name: letsencrypt-staging
+    name: letsencrypt-prodution
     kind: ClusterIssuer
     group: cert-manager.io
   secretTemplate:
