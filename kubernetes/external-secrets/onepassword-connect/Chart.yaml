@@ -1,6 +1,6 @@
 ---
 apiVersion: v2
-name: external-secrets
+name: onepassword-connect
 version: 0.0.0
 dependencies:
   - name: connect
