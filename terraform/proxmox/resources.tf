@@ -25,7 +25,7 @@ resource "proxmox_vm_qemu" "k8s_server" {
 
   network {
     model  = "virtio"
-    bridge = "vmbr0"
+    bridge = "vmbr1"
   }
 
   lifecycle {
@@ -35,7 +35,7 @@ resource "proxmox_vm_qemu" "k8s_server" {
   }
 
   # Cloud Init Settings
-  ipconfig0 = "ip=192.168.30.6${count.index + 1}/24,gw=192.168.30.1"
+  ipconfig0 = "ip=192.168.40.1${count.index + 1}/24,gw=192.168.40.1"
 
   sshkeys = <<EOF
   ${var.ssh_key}
@@ -59,16 +59,16 @@ resource "proxmox_vm_qemu" "k8s_agent" {
   bootdisk = "scsi0"
 
   disk {
-    slot         = 0
-    size         = "25G"
-    type         = "scsi"
-    storage      = "local-ssd-2"
-    iothread     = 1
+    slot     = 0
+    size     = "25G"
+    type     = "scsi"
+    storage  = "local-ssd-2"
+    iothread = 1
   }
 
   network {
     model  = "virtio"
-    bridge = "vmbr0"
+    bridge = "vmbr1"
   }
 
   lifecycle {
@@ -78,7 +78,7 @@ resource "proxmox_vm_qemu" "k8s_agent" {
   }
 
   # Cloud Init Settings
-  ipconfig0 = "ip=192.168.30.7${count.index + 1}/24,gw=192.168.30.1"
+  ipconfig0 = "ip=192.168.40.2${count.index + 1}/24,gw=192.168.40.1"
 
   sshkeys = <<EOF
   ${var.ssh_key}
