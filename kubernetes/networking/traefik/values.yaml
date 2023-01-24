@@ -1,0 +1,55 @@
+traefik:
+  additionalArguments:
+    - "--providers.kubernetesingress.ingressendpoint.publishedservice=traefik/traefik"
+
+  service:
+    spec:
+      externalTrafficPolicy: Local
+    annotations:
+      metallb.universe.tf/allow-shared-ip: traefik
+
+  metrics:
+    prometheus:
+      serviceMonitor:
+        enabled: true
+      prometheusRule:
+        rules:
+          - alert: TraefikDown
+            expr: up{job="traefik"} == 0
+            for: 5m
+            labels:
+              context: traefik
+              severity: critical
+            annotations:
+              summary: "Traefik Down"
+              description: "{{ $labels.pod }} on {{ $labels.nodename }} is down"
+
+  ports:
+    traefik:
+      expose: true
+    mailsecure:
+      port: 465
+      expose: true
+      exposedPort: 465
+    web:
+      redirectTo: websecure
+    metrics:
+      expose: true
+
+  providers:
+    kubernetesCRD:
+      allowExternalNameServices: true
+      allowEmptyServices: true
+    kubernetesIngress:
+      allowExternalNameServices: true
+      allowEmptyServices: true
+      publishedService:
+        enabled: true
+  logs:
+    general:
+      level: DEBUG
+    access:
+      enabled: true
+  ingressRoute:
+    dashboard:
+      enabled: false
