@@ -27,10 +27,10 @@ traefik:
   ports:
     traefik:
       expose: true
-    mailsecure:
-      port: 465
-      expose: true
-      exposedPort: 465
+    # mailsecure:
+    #   port: 465
+    #   expose: true
+    #   exposedPort: 465
     web:
       redirectTo: websecure
     metrics:
