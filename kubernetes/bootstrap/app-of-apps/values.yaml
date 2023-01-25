@@ -21,6 +21,6 @@ apps:
   - name: metallb
     path: kubernetes/networking
     namespace: networking
-  - name: traefik
-    path: kubernetes/networking
-    namespace: networking
+  # - name: traefik
+  #   path: kubernetes/networking
+  #   namespace: networking
