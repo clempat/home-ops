@@ -18,6 +18,9 @@ apps:
   - name: cert-manager
     path: kubernetes/networking
     namespace: networking
+  - name: metallb
+    path: kubernetes/networking
+    namespace: networking
   - name: traefik
     path: kubernetes/networking
     namespace: networking

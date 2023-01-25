@@ -21,6 +21,12 @@ tasks:
     cmds:
       - op run --env-file=.env terraform init
       - op run --env-file=.env terraform apply
+  nuke:
+    desc: Provision proxmox VMs for the cluster
+    dir: "{{.TERRAFORM_DIR}}/proxmox"
+    cmds:
+      - op run --env-file=.env terraform destroy
+      - rm -rf {{.ROOT_DIR}}/.kubeconfig
   install:
     desc: Prepare the vms os
     dir: "{{.ANSIBLE_DIR}}"
