@@ -23,10 +23,6 @@ traefik:
             annotations:
               summary: "Traefik Down"
               description: "{{ $labels.pod }} on {{ $labels.nodename }} is down"
-  tlsStore:
-    default:
-      defaultCertificate:
-        secretName: "{{ .Values.homelab_domain }}-tls"
 
   ports:
     websecure:
