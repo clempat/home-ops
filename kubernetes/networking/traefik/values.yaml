@@ -1,10 +1,10 @@
 traefik:
   additionalArguments:
     - "--providers.kubernetesingress.ingressendpoint.publishedservice=traefik/traefik"
-
   service:
     spec:
       externalTrafficPolicy: Local
+      loadBalancerIP: "192.168.40.1"
     annotations:
       metallb.universe.tf/allow-shared-ip: traefik
 
@@ -25,6 +25,10 @@ traefik:
               description: "{{ $labels.pod }} on {{ $labels.nodename }} is down"
 
   ports:
+    websecure:
+    forwardedHeaders:
+      trustedIPs:
+        - 192.168.0.0/16
     traefik:
       expose: true
     mailsecure:
