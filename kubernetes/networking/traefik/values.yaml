@@ -1,3 +1,4 @@
+---
 traefik:
   additionalArguments:
     - "--providers.kubernetesingress.ingressendpoint.publishedservice=networking/traefik"
