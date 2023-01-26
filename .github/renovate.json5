@@ -28,7 +28,6 @@
   "gitAuthor": "clempat-bot <123061670+clempat-bot[bot]@users.noreply.github.com>",
   "suppressNotifications": ["prIgnoreNotification"],
   "rebaseWhen": "conflicted",
-  "schedule": ["every saturday"],
   "pre-commit": {
     "enabled": true
   },
