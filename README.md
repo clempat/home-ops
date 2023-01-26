@@ -19,9 +19,17 @@ I have a Proxmox server running, an API key with permission to PVEAdmin on '/' a
 
 I have as well on the workstation go-task, terraform, ansible and more installed.
 
-1. `task cluster:create` - Provide nodes on Proxmox
-2. `task cluster:deps` - Install necessary dependancies
-3. `task cluster:Install` - Install needs for cluster and k3s
-4. `export KUBECONFIG=./kubeconfig`
+1. `task workstations:prepare` - Install necessary dependancies on workstation
+2. `task terraform:networking` - Setup unifi Homelab networking
+3. `task terraform:create` - Provision the VMs for the cluster
+4. `task cluster:Install` - Install needs for cluster and k3s
+5. `task cluster:bootstrap` - Launch argoCD and apps
+6. `export KUBECONFIG=$(PWD)/kubeconfig`
 
 You can know check the nodes with `kubectl get nodes`
+
+## Nuke
+
+```bash
+task terraform:nuke
+```

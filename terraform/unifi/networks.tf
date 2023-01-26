@@ -2,7 +2,7 @@
 resource "unifi_network" "homelab" {
   name    = "homelab"
   vlan_id = 40
-  subnet = "192.168.40.0/24"
+  subnet  = "192.168.40.0/24"
 
   dhcp_dns            = []
   dhcp_enabled        = false

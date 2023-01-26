@@ -10,6 +10,8 @@ env:
   KUBECONFIG: "{{.ANSIBLE_DIR}}/kubernetes/kubeconfig"
 
 includes:
+  workstation: .taskfiles/WorkstationTasks.yml
+  terraform: .taskfiles/TerraformTasks.yml
   cluster: .taskfiles/ClusterTasks.yml
 
 tasks:

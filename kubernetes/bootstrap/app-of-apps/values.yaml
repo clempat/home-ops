@@ -1,3 +1,4 @@
+---
 gitops:
   repo: https://github.com/clempat/home-ops
   revision: main
