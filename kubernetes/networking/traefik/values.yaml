@@ -1,6 +1,6 @@
 traefik:
   additionalArguments:
-    - "--providers.kubernetesingress.ingressendpoint.publishedservice=traefik/traefik"
+    - "--providers.kubernetesingress.ingressendpoint.publishedservice=networking/traefik"
   service:
     spec:
       externalTrafficPolicy: Local
