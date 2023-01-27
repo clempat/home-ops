@@ -25,3 +25,6 @@ apps:
   - name: traefik
     path: kubernetes/networking
     namespace: networking
+  - name: longhorn
+    path: kubernetes/storage
+    namespace: storage

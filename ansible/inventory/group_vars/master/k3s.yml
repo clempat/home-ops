@@ -16,13 +16,13 @@ k3s_server:
   disable:
     # Disable flannel - replaced with Calico
     - flannel
-    # Disable local-path-provisioner - installed with Flux
+    # Disable local-path-provisioner - installed with ArgoCD
     - local-storage
-    # Disable metrics-server - installed with Flux
+    # Disable metrics-server - installed with ArgoCD
     - metrics-server
-    # Disable servicelb - replaced with metallb and installed with Flux
+    # Disable servicelb - replaced with metallb and installed with ArgoCD
     - servicelb
-    # Disable traefik - replaced with ingress-nginx and installed with Flux
+    # Disable traefik - replaced with ingress-nginx and installed with ArgoCD
     - traefik
   disable-network-policy: true
   disable-cloud-controller: true
