@@ -1,0 +1,7 @@
+---
+persistence:
+  defaultClassReplicaCount: 2
+defaultSettings:
+  nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
+  defaultSettings.defaultReplicaCount: 2
+  backupTarget: nfs://192.168.30.4:/mnt/HDD/Backups/Longhorn
