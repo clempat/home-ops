@@ -28,3 +28,9 @@ apps:
   - name: longhorn
     path: kubernetes/storage
     namespace: storage
+  - name: glauth
+    path: kubernetes/authentication
+    namespace: authentication
+  - name: authelia
+    path: kubernetes/authentication
+    namespace: authentication
