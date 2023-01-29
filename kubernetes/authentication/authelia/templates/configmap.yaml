@@ -1,0 +1,168 @@
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: authelia-template
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: onepassword-connect
+  target:
+    name: authelia-config
+    template:
+      engineVersion: v2
+      data:
+        config.yaml: |-
+          theme: auto
+          default_2fa_method: totp
+          jwt_secret: "{{ `{{.authelia_jwt_secret}}` }}"
+          storage:
+            encryption_key: "{{ `{{.authelia_storage_encryption_key}}` }}"
+            local:
+              path: /db/db.sqlite3
+
+          authentication_backend:
+            password_reset:
+              disable: true
+            ldap:
+              implementation: custom
+              url: ldap://glauth.authentication.svc.cluster.local
+              timeout: 5s
+              start_tls: false
+              base_dn: "{{ `{{.glauth_baseDN}}` }}"
+              additional_users_dn: OU=users
+              users_filter: (&({username_attribute}={input})(objectClass=posixAccount))
+              username_attribute: uid
+              mail_attribute: mail
+              display_name_attribute: givenName
+              groups_filter: (&(memberUid={username})(objectClass=posixGroup))
+              group_name_attribute: cn
+              user: "{{ `{{.glauth_search_username}}` }}"
+              password: "{{ `{{.glauth_search_password}}` }}"
+
+          access_control:
+            default_policy: two_factor
+
+          session:
+            domain: "{{ `{{.homelab_domain}}` }}"
+
+          notifier:
+            disable_startup_check: false
+            smtp:
+              host: smtp.fastmail.com
+              port: 465
+              username: {{ `{{.smtp_username}}` }}
+              password: {{ `{{.smtp_password}}` }}
+              sender: "Authelia <{{ `{{.smtp_sender}}` }}>"
+
+          server:
+            port: 80
+
+          telemetry:
+            metrics:
+              enabled: true
+              address: "tcp://0.0.0.0:8080"
+
+          identity_providers:
+            oidc:
+              issuer_private_key: |-
+                {{ `{{.authelia_private_pem | nindent 8 }}` }}
+              cors:
+                endpoints: ["authorization", "token", "revocation", "introspection"]
+                allowed_origins_from_client_redirect_uris: true
+              clients:
+                - id: argocd
+                  description: Argo CD
+                  secret: {{ `{{.argocd_oidc_secret}}` }}
+                  public: false
+                  authorization_policy: two_factor
+                  redirect_uris:
+                    - https://argocd.{{ `{{.homelab_domain}}` }}/auth/callback
+                  scopes:
+                    - openid
+                    - groups
+                    - email
+                    - profile
+                  userinfo_signing_algorithm: none
+                - id: argocd_cli
+                  description: Argo CD (CLI)
+                  public: true
+                  authorization_policy: two_factor
+                  redirect_uris:
+                    - http://localhost:8085/auth/callback
+                  scopes:
+                    - openid
+                    - groups
+                    - email
+                    - profile
+                    - offline_access
+                  userinfo_signing_algorithm: none
+                - id: grafana
+                  description: Grafana
+                  secret: "{{ `{{.grafana_oidc_secret}}` }}"
+                  public: false
+                  authorization_policy: two_factor
+                  pre_configured_consent_duration: 1y
+                  scopes:
+                    - openid
+                    - groups
+                    - email
+                    - profile
+                  redirect_uris:
+                    - https://grafana.{{ `{{.homelab_domain}}` }}/login/generic_oauth
+                  userinfo_signing_algorithm: none
+
+  dataFrom:
+    - extract:
+        key: Authelia
+        conversionStrategy: Default
+        decodingStrategy: None
+      rewrite:
+        - regexp:
+            source: "(.*)"
+            target: "authelia_$1"
+    - extract:
+        key: Glauth
+        conversionStrategy: Default
+        decodingStrategy: None
+      rewrite:
+        - regexp:
+            source: "(.*)"
+            target: "glauth_$1"
+    - extract:
+        key: Fastmail SMTP
+        conversionStrategy: Default
+        decodingStrategy: None
+      rewrite:
+        - regexp:
+            source: "(.*)"
+            target: "smtp_$1"
+    - extract:
+        key: ArgoCD
+        conversionStrategy: Default
+        decodingStrategy: None
+        property: oidc_secret
+      rewrite:
+        - regexp:
+            source: "(.*)"
+            target: "argocd_$1"
+    - extract:
+        key: Grafana
+        property: oidc_secret
+        conversionStrategy: Default
+        decodingStrategy: None
+      rewrite:
+        - regexp:
+            source: "(.*)"
+            target: "grafana_$1"
+    - extract:
+        key: Homelab
+        property: homelab_domain
+        conversionStrategy: Default
+        decodingStrategy: None
+
+    - extract:
+        key: Authelia PEM
+        property: private.pem
+        conversionStrategy: Default
+        decodingStrategy: None
