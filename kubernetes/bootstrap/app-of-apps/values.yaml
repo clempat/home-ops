@@ -31,6 +31,6 @@ apps:
   - name: glauth
     path: kubernetes/authentication
     namespace: authentication
-  - name: authelia
-    path: kubernetes/authentication
-    namespace: authentication
+  # - name: authelia
+  #   path: kubernetes/authentication
+  #   namespace: authentication
