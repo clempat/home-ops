@@ -26,7 +26,7 @@ spec:
               disable: true
             ldap:
               implementation: custom
-              url: ldap://glauth.authentication.svc.cluster.local:389
+              url: ldap://glauth
               timeout: 5s
               start_tls: false
               base_dn: "{{ `{{.glauth_baseDN}}` }}"
