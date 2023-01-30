@@ -7,7 +7,8 @@ app-template:
   image:
     repository: ghcr.io/authelia/authelia
     tag: 4.37.5
-  args: ["--config", "/config/config.yaml"]
+  command: ["tail", "-f", "/dev/null"]
+  # args: ["--config", "/config/config.yaml"]
   env:
     TZ: Europe/Berlin
   enableServiceLinks: false
