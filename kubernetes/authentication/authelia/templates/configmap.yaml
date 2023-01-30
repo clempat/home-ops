@@ -37,8 +37,8 @@ spec:
               display_name_attribute: givenName
               groups_filter: (&(memberUid={username})(objectClass=posixGroup))
               group_name_attribute: cn
-              user: "{{ `{{.glauth_search_username}}` }}"
-              password: "{{ `{{.glauth_search_password}}` }}"
+              user: "{{ `{{.glauth_clempat_username}}` }}"
+              password: "{{ `{{.glauth_clempat_password}}` }}"
 
           access_control:
             default_policy: two_factor
