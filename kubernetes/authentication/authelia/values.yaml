@@ -7,8 +7,7 @@ app-template:
   image:
     repository: ghcr.io/authelia/authelia
     tag: 4.37.5
-  command: ["ping", "http://glauth.authentication.svc.cluster.local"]
-  # args: ["--config", "/config/config.yaml"]
+  args: ["--config", "/config/config.yaml"]
   env:
     TZ: Europe/Berlin
   enableServiceLinks: false
