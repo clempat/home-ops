@@ -27,9 +27,9 @@ argo-cd:
         https
       oidc.config: |
         name: Authelia
-        issuer: $argocd-external-secrets:oidc_url
+        issuer: $oidc_url
         clientID: argocd
-        clientSecret: $argocd-external-secrets:oidc_secret
+        clientSecret: $oidc_secret
         cliClientID: argocd-cli
         requestedScopes:
           - openid
