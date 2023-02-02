@@ -33,7 +33,7 @@ spec:
               name = "svcaccts"
               gidnumber = 6500
           [[groups]]
-              name = "admins"
+              name = "admin"
               gidnumber = 6501
           [[groups]]
               name = "people"
