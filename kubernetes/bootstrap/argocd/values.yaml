@@ -2,6 +2,7 @@
 git:
   name: homelab
   url: https://github.com/clempat/home-ops
+  username: clempat
 
 secret:
   name: helm-secrets-private-keys
@@ -26,9 +27,9 @@ argo-cd:
         https
       oidc.config: |
         name: Authelia
-        issuer: $argocd-secrets:oidc_url
+        issuer: $argocd-external-secrets:oidc_url
         clientID: argocd
-        clientSecret: $argocd-secrets:oidc_secret
+        clientSecret: $argocd-external-secrets:oidc_secret
         cliClientID: argocd-cli
         requestedScopes:
           - openid
