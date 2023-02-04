@@ -43,3 +43,6 @@ apps:
   - name: external-dns
     path: kubernetes/networking
     namespace: networking
+  - name: mailrise
+    path: kubernetes/selfhosted
+    namespace: selfhosted

@@ -1,0 +1,38 @@
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: mailrise-config
+  namespace: selfhosted
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: onepassword-connect
+  target:
+    name: mailrise-config
+    creationPolicy: Owner
+    template:
+      engineVersion: v2
+      data:
+        mailrise.conf: |
+          listen:
+            port: 25
+          configs:
+            pushover@{{` {{ .homelab_domain }} `}}:
+              mailrise:
+                urls:
+                  - pover://{{` {{ .pover_user_key }} `}}@{{` {{ .pover_api_token }} `}}
+  dataFrom:
+    - extract:
+        key: Pushover
+        conversionStrategy: Default
+        decodingStrategy: None
+      rewrite:
+        - regexp:
+            source: "(.*)"
+            target: "pover_$1"
+    - extract:
+        key: Homelab
+        property: homelab_domain
+        conversionStrategy: Default
+        decodingStrategy: None
