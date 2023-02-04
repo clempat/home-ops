@@ -34,3 +34,9 @@ apps:
   - name: authelia
     path: kubernetes/authentication
     namespace: authentication
+  - name: reloader
+    path: kubernetes/system
+    namespace: system
+  - name: reflector
+    path: kubernetes/system
+    namespace: system
