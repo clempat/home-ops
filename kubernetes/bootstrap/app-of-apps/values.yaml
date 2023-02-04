@@ -40,3 +40,6 @@ apps:
   - name: reflector
     path: kubernetes/system
     namespace: system
+  - name: external-dns
+    path: kubernetes/networking
+    namespace: networking
