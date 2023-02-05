@@ -1,0 +1,91 @@
+---
+kube-prometheus-stack:
+  cleanPrometheusOperatorObjectNames: true
+  grafana:
+    enabled: false
+    forceDeployDashboards: true
+  prometheus:
+    ingress:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
+        hajimari.io/enable: "true"
+        hajimari.io/icon: simple-icons:prometheus
+        hajimari.io/appName: Prometheus
+        hajimari.io/info: Open-source monitoring system with a dimensional data model, flexible query language, efficient time series database and modern alerting approach
+    prometheusSpec:
+      retention: 2d
+      retentionSize: 6GB
+      enableAdminAPI: true
+      walCompression: true
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: longhorn
+            resources:
+              requests:
+                storage: 20Gi
+      ruleSelectorNilUsesHelmValues: false
+      serviceMonitorSelectorNilUsesHelmValues: false
+      podMonitorSelectorNilUsesHelmValues: false
+      probeSelectorNilUsesHelmValues: false
+  alertmanager:
+    ingress:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
+        hajimari.io/enable: "true"
+        hajimari.io/icon: alert-decagram-outline
+        hajimari.io/appName: alertmanager
+        hajimari.io/info: Handles alerts sent by client applications such as the Prometheus server
+    config:
+      global:
+        resolve_timeout: 5m
+      route:
+        group_by: ["alertname", "job"]
+        group_wait: 30s
+        group_interval: 5m
+        repeat_interval: 6h
+        receiver: pushover
+        routes:
+          - receiver: healthchecksio
+            group_wait: 0s
+            group_interval: 1m
+            repeat_interval: 1m
+            matchers:
+              - alertname = "Watchdog"
+          - receiver: "null"
+            matchers:
+              - alertname = "InfoInhibitor"
+          - receiver: pushover
+            matchers:
+              - severity =~ "critical|alert"
+            continue: true
+    alertmanagerSpec:
+      storage:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: longhorn
+            resources:
+              requests:
+                storage: 1Gi
+  kubeControllerManager:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      https: true
+      insecureSkipVerify: true
+  kubeScheduler:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      https: true
+      insecureSkipVerify: true
+  kubeProxy:
+    enabled: true
+  kubeEtcd:
+    enabled: true
