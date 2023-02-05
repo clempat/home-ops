@@ -46,3 +46,6 @@ apps:
   - name: mailrise
     path: kubernetes/selfhosted
     namespace: selfhosted
+  - name: kube-prometheus-stack
+    path: kubernetes/monitoring
+    namespace: monitoring
