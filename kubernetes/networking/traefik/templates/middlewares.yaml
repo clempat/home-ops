@@ -3,9 +3,11 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: authelia
+  namespace: networking
 spec:
   forwardAuth:
-    address: http://authelia.authentication/api/verify?rd=auth.{{ .Values.homelab_domain }}
+    address: http://authelia.authentication/api/verify?rd=https%3A%2F%2Fauth.{{ .Values.homelab_domain }}%2F
+    trustForwardHeader: true
     authResponseHeaders:
       - Remote-User
       - Remote-Name
