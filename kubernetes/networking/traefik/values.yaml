@@ -30,6 +30,8 @@ traefik:
       forwardedHeaders:
         trustedIPs:
           - 192.168.0.0/16
+          - 10.53.0.0/16
+          - 10.52.0.0/16
     traefik:
       expose: true
     mailsecure:
