@@ -25,7 +25,7 @@
   "repositories": ["clempat/home-ops"],
   "onboarding": false,
   "requireConfig": "optional",
-  "gitAuthor": "clempat-bot <12327597+clempat-bot[bot]@users.noreply.github.com>",
+  "gitAuthor": "clempat-bot <123275975+clempat-bot[bot]@users.noreply.github.com>",
   "suppressNotifications": ["prIgnoreNotification"],
   "rebaseWhen": "conflicted",
   "pre-commit": {
