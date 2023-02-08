@@ -10,14 +10,14 @@ resource "proxmox_vm_qemu" "k8s_server" {
   cores    = 4
   sockets  = 1
   cpu      = "host"
-  memory   = 8192
+  memory   = 16384
   scsihw   = "virtio-scsi-pci"
   bootdisk = "scsi0"
   onboot   = true
 
   disk {
     slot     = 0
-    size     = "25G"
+    size     = "50G"
     type     = "scsi"
     storage  = "local-ssd-2"
     iothread = 1
@@ -60,7 +60,7 @@ resource "proxmox_vm_qemu" "k8s_agent" {
 
   disk {
     slot     = 0
-    size     = "25G"
+    size     = "50G"
     type     = "scsi"
     storage  = "local-ssd-2"
     iothread = 1
