@@ -12,9 +12,28 @@ env:
 includes:
   workstation: .taskfiles/WorkstationTasks.yml
   terraform: .taskfiles/TerraformTasks.yml
-  cluster: .taskfiles/ClusterTasks.yml
+  kubernetes: .taskfiles/KubernetesTasks.yml
+  ansible: .taskfiles/AnsibleTasks.yml
 
 tasks:
   default:
     silent: true
     cmds: ["task -l"]
+
+  bootstrap:
+    desc: Bootstrap the K3s cluster
+    silent: true
+    cmds:
+      - task: ansible:deps
+      - task: ansible:k3s
+      - task: kubernetes:create-namespace
+        vars:
+          namespace: argocd
+      - task: kubernetes:apply
+        vars:
+          app: bootstrap/argocd
+      - kubectl -n argocd wait --timeout=60s --for condition=Established crd/applications.argoproj.io crd/applicationsets.argoproj.io
+      - task: kubernetes:apply
+        vars:
+          app: bootstrap/app-of-apps
+          namespace: argocd

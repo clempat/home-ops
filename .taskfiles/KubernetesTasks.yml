@@ -1,0 +1,57 @@
+---
+version: "3"
+
+tasks:
+  template:
+    desc: Template Helm chart in $app directory
+    dir: "{{.KUBERNETES_DIR}}/{{.app}}"
+    silent: true
+    env:
+      HELM_SECRETS_IGNORE_MISSING_VALUES: "true"
+    vars:
+      app: "{{.app | default .USER_WORKING_DIR}}"
+      namespace: "{{.namespace | default (base .app)}}"
+      name: "{{.name | default (base .app)}}"
+    cmds:
+      - helm template --dependency-update --include-crds --namespace {{.namespace}} {{.name}} . -f secrets://secrets.sops.yaml
+
+  apply:
+    desc: Apply Helm chart from $app directory
+    silent: true
+    vars:
+      app: "{{.app | default .USER_WORKING_DIR}}"
+      namespace: "{{.namespace | default (base .app)}}"
+      name: "{{.name | default (base .app)}}"
+    cmds:
+      - app={{.app}} namespace={{.namespace}} name={{.name}} task kubernetes:template | kubectl apply -n {{.namespace}} -f -
+
+  create-namespace:
+    desc: Create K8s namespace with name $namespace
+    silent: true
+    vars:
+      namespace: '{{.namespace | default "default"}}'
+    cmds:
+      - kubectl create namespace {{.namespace}} --dry-run=client --output=yaml | kubectl apply -f -
+
+  kubeconform:
+    desc: Template and kubeconform Helm chart in $app directory
+    dir: "{{.app}}"
+    silent: true
+    env:
+      HELM_SECRETS_IGNORE_MISSING_VALUES: "true"
+    vars:
+      app: "{{.app | default .USER_WORKING_DIR}}"
+      namespace: "{{.namespace | default (base .app)}}"
+      name: "{{.name | default (base .app)}}"
+    cmds:
+      - bash {{.ROOT_DIR}}/.bin/kubeconform.sh {{.namespace}} {{.name}}
+
+  clean:
+    desc: Clean all the Helm artifacts from $app directory
+    dir: "{{.app}}"
+    silent: true
+    vars:
+      app: "{{.app | default .USER_WORKING_DIR}}"
+    cmds:
+      - fd -t d charts --exec rm -rf {}
+      - fd -t f Chart.lock --exec rm -rf {}
