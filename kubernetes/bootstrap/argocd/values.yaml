@@ -39,16 +39,21 @@ argo-cd:
         hajimari.io/icon: robot
         hajimari.io/appName: ArgoCD
         hajimari.io/info: Declarative, GitOps continuous delivery tool for Kubernetes
+    # metrics: &metrics
+    #   enabled: true
+    #   serviceMonitor:
+    #     enabled: true
+    #     annotations:
+    #       argo: stop-reconciling
+  dex:
+    enabled: false
+  controller:
     metrics: &metrics
       enabled: true
       serviceMonitor:
         enabled: true
         annotations:
           argo: stop-reconciling
-  dex:
-    enabled: false
-  controller:
-    metrics: *metrics
   repoServer:
     metrics: *metrics
     rbac:
