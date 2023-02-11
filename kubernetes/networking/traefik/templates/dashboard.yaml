@@ -19,3 +19,6 @@ spec:
                 name: traefik
                 port:
                   number: 9000
+  tls:
+    - hosts:
+        - "traefik.{{ .Values.homelab_domain }}"
