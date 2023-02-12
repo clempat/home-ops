@@ -3,9 +3,10 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: traefik-dashboard
+  namespace: networking
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.middlewares: {{ .Values.auth_middleware }}
+    traefik.ingress.kubernetes.io/router.middlewares: "{{ .Values.auth_middleware }}"
 spec:
   ingressClassName: traefik
   rules:
