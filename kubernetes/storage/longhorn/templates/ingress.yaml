@@ -5,6 +5,7 @@ metadata:
   name: &app longhorn
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
 spec:
   ingressClassName: traefik
   rules:
