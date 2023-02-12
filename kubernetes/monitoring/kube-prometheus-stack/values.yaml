@@ -10,6 +10,7 @@ kube-prometheus-stack:
       ingressClassName: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: networking-authelia@kubernetescrd
         hajimari.io/enable: "true"
         hajimari.io/icon: simple-icons:prometheus
         hajimari.io/appName: Prometheus
@@ -36,7 +37,7 @@ kube-prometheus-stack:
       ingressClassName: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.middlewares: networking-authelia@kubernetes
+        traefik.ingress.kubernetes.io/router.middlewares: networking-authelia@kubernetescrd
         hajimari.io/enable: "true"
         hajimari.io/icon: alert-decagram-outline
         hajimari.io/appName: alertmanager
