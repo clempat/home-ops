@@ -49,3 +49,6 @@ apps:
   - name: kube-prometheus-stack
     path: kubernetes/monitoring
     namespace: monitoring
+  - name: emqx
+    path: kubernetes/home
+    namespace: home
