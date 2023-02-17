@@ -1,0 +1,43 @@
+---
+app-template:
+  image:
+    repository: linuxserver/freshrss
+    pullPolicy: IfNotPresent
+    tag: 1.20.2
+  strategy:
+    type: Recreate
+  env:
+    TZ: Europe/Berlin
+    PUID: "1000"
+    PGID: "1000"
+  service:
+    main:
+      ports:
+        http:
+          port: 80
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        hajimari.io/enable: "true"
+        hajimari.io/icon: "rss-box"
+        hajimari.io/instance: "internal"
+        hajimari.io/group: "News"
+    external:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        hajimari.io/enable: "true"
+        hajimari.io/icon: "rss-box"
+        hajimari.io/instance: "external"
+        hajimari.io/appName: "FreshRSS"
+  persistence:
+    config:
+      enabled: true
+      mountPath: /config
+      existingClaim: freshrss-config
+      skipuninstall: true
+  resources:
+    limits:
+      memory: 513Mi
