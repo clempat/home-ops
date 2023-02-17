@@ -52,3 +52,6 @@ apps:
   - name: emqx
     path: kubernetes/home
     namespace: home
+  - name: freshrss
+    path: kubernetes/selfhosted
+    namespace: selfhosted
