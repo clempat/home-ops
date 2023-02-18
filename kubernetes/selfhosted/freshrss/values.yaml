@@ -1,7 +1,7 @@
 ---
 app-template:
   image:
-    repository: linuxserver/freshrss
+    repository: freshrss/freshrss
     pullPolicy: IfNotPresent
     tag: 1.20.2
   strategy:
