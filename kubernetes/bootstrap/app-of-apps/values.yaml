@@ -64,3 +64,12 @@ apps:
   - name: volsync
     path: kubernetes/storage
     namespace: storage
+  - name: democratic-csi-local
+    path: kubernetes/storage
+    namespace: storage
+  - name: cloudnative-pg
+    path: kubernetes/database
+    namespace: database
+  # - name: home-assistant
+  #   path: kubernetes/home
+  #   namespace: home

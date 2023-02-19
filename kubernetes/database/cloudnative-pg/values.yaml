@@ -1,0 +1,4 @@
+---
+cloudnative-pg:
+  crds:
+    create: true

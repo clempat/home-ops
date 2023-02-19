@@ -14,6 +14,7 @@ includes:
   terraform: .taskfiles/TerraformTasks.yml
   kubernetes: .taskfiles/KubernetesTasks.yml
   ansible: .taskfiles/AnsibleTasks.yml
+  precommit: .taskfiles/PrecommitTasks.yml
 
 tasks:
   default:

@@ -1,0 +1,45 @@
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: home-assistant-restic
+  namespace: home
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: onepassword-connect
+  target:
+    name: home-assistant-restic-secret
+    creationPolicy: Owner
+    template:
+      engineVersion: v2
+      data:
+        RESTIC_REPOSITORY: "{{ .REPOSITORY_TEMPLATE }}/home-assistant"
+        RESTIC_PASSWORD: "{{ .RESTIC_PASSWORD }}"
+        AWS_ACCESS_KEY_ID: "{{ .S3_ACCESS_KEY_ID }}"
+        AWS_SECRET_ACCESS_KEY: "{{ .S3_SECRET_ACCESS_KEY }}"
+  dataFrom:
+    - extract:
+        key: volsync-restic-template
+        conversionStrategy: Default
+        decodingStrategy: None
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: home-assistant
+  namespace: home
+spec:
+  sourcePVC: config-home-assistant-0
+  trigger:
+    schedule: "0 0 * * *"
+  restic:
+    copyMethod: Snapshot
+    pruneIntervalDays: 10
+    repository: home-assistant-restic-secret
+    cacheCapacity: 2Gi
+    volumeSnapshotClassName: longhorn
+    storageClassName: longhorn
+    retain:
+      daily: 10
+      within: 3d
