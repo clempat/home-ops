@@ -55,3 +55,6 @@ apps:
   - name: freshrss
     path: kubernetes/selfhosted
     namespace: selfhosted
+  - name: volsync
+    path: kubernetes/storage
+    namespace: storage
