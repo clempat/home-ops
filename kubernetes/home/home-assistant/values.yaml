@@ -1,0 +1,115 @@
+---
+app-template:
+  controller:
+    type: statefulset
+    replicas: 1
+    annotations:
+      reloader.stakater.com/auto: "true"
+  image:
+    repository: homeassistant/home-assistant
+    tag: 2023.2.5
+    pullPolicy: IfNotPresent
+  strategy:
+    type: Recreate
+  env:
+    TZ: "Europe/Berlin"
+  hostNetwork: true
+  dnsPolicy: ClusterFirstWithHostNet
+
+  initContainers:
+    init-db:
+      image: ghcr.io/onedr0p/postgres-initdb:14.7
+      imagePullPolicy: IfNotPresent
+      envFrom:
+        - secretRef:
+            name: home-assistant-secret
+  service:
+    main:
+      ports:
+        http:
+          port: 8123
+        mdns-tcp:
+          enabled: true
+          port: 5353
+          protocol: TCP
+          targetPort: 5353
+        mdns-udp:
+          enabled: true
+          port: 5353
+          protocol: UDP
+          targetPort: 5353
+
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        hajimari.io/enable: "true"
+        hajimari.io/icon: home-assistant
+        hajimari.io/appName: Home Assistant
+        hajimari.io/info: Home automation that puts local control and privacy first
+
+  serviceMonitor:
+    main:
+      enabled: true
+      endpoints:
+        - port: http
+          scheme: http
+          path: /api/prometheus
+          interval: 10s
+          scrapeTimeout: 10s
+          bearerTokenSecret:
+            name: home-assistant-token
+            key: token
+
+  persistence:
+    backups:
+      enable: true
+      type: nfs
+      server: 192.168.30.184
+      path: /mnt/HDD/Backups/home-assistant
+
+  volumeClaimTemplates:
+    - name: config
+      mountPath: /config
+      accessMode: ReadWriteOnce
+      size: 10Gi
+      storageClass: longhorn
+
+  resources:
+    limits:
+      memory: 3000Mi
+    requests:
+      cpu: 100m
+      memory: 1000Mi
+
+  addons:
+    codeserver:
+      enabled: true
+      image:
+        repository: ghcr.io/coder/code-server
+        tag: 4.10.0
+      env:
+        TZ: Europe/Berlin
+      workingDir: /config
+      args:
+        - --auth
+        - "none"
+        - --user-data-dir
+        - "/config/.vscode"
+        - --extensions-dir
+        - "/config/.vscode"
+      ingress:
+        enabled: true
+        ingressClassName: traefik
+        annotations:
+          hajimari.io/appName: "HASS Config"
+          hajimari.io/icon: cib:visual-studio-code
+          hajimari.io/enable: "true"
+          hajimari.io/info: VS Code for HASS configuration editing
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
+      volumeMounts:
+        - name: config
+          mountPath: /config
