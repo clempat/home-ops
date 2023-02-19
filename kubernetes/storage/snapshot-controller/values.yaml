@@ -1,0 +1,11 @@
+---
+snapshot-controller:
+  volumeSnapshotClasses:
+    - name: longhorn
+      driver: driver.longhorn.io
+      annotations:
+        snapshot.storage.kubernetes.io/is-default-class: "true"
+      deletionPolicy: Delete
+
+  serviceMonitor:
+    create: true
