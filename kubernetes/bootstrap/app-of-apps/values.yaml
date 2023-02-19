@@ -55,6 +55,12 @@ apps:
   - name: freshrss
     path: kubernetes/selfhosted
     namespace: selfhosted
+  - name: snapshot-controller
+    path: kubernetes/storage
+    namespace: storage
+  - name: snapshot-validation-webhook
+    path: kubernetes/storage
+    namespace: storage
   - name: volsync
     path: kubernetes/storage
     namespace: storage
