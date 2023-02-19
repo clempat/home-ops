@@ -70,6 +70,6 @@ apps:
   - name: cloudnative-pg
     path: kubernetes/database
     namespace: database
-  # - name: home-assistant
-  #   path: kubernetes/home
-  #   namespace: home
+  - name: home-assistant
+    path: kubernetes/home
+    namespace: home
