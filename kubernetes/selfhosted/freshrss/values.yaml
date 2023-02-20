@@ -8,6 +8,7 @@ app-template:
     type: Recreate
   env:
     TZ: Europe/Berlin
+    CRON_MIN: "18,48"
     PUID: "1000"
     PGID: "1000"
   service:
