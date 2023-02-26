@@ -80,6 +80,8 @@ apps:
           - /spec/duration
   - name: qbittorrent
     path: kubernetes/media
+  - name: prowlarr
+    path: kubernetes/media
   - name: theme-park
     path: kubernetes/selfhosted
     namespace: selfhosted
