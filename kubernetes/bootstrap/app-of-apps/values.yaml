@@ -75,6 +75,9 @@ apps:
     namespace: networking
   - name: qbittorrent
     path: kubernetes/media
+  - name: theme-park
+    path: kubernetes/selfhosted
+    namespace: selfhosted
   # - name: home-assistant
   #   path: kubernetes/home
   #   namespace: home
