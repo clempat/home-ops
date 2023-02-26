@@ -1,0 +1,55 @@
+---
+app-template:
+  controller:
+    replicas: 1
+    type: statefulset
+  image:
+    repository: ghcr.io/onedr0p/qbittorrent
+    tag: 4.5.1
+  env:
+    TZ: Europe/Berlin
+    QBITTORRENT__PORT: &port 80
+    QBITTORRENT__BT_PORT: &port-bt 57464
+  hostname: qbittorrent
+  service:
+    main:
+      ports:
+        http:
+          port: *port
+        bt:
+          port: *port-bt
+  podAnnotations:
+    setGateway: "true"
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: networking-authelia@kubernetescrd
+        hajimari.io/enable: "true"
+        hajimari.io/icon: download
+        hajimari.io/appName: qBittorrent
+        hajimari.io/info: Open-source software alternative to µTorrent
+  podSecurityContext:
+    runAsUser: 1028
+    runAsGroup: 100
+    fsGroup: 100
+    fsGroupChangePolicy: "OnRootMismatch"
+  persistence:
+    config:
+      enabled: true
+      existingClaim: qbittorrent
+    data:
+      enabled: true
+      type: nfs
+      server: 192.168.30.4
+      path: /mnt/HDD/media
+      subPath: torrent
+      mountPath: /data
+  resources:
+    requests:
+      cpu: 10m
+      memory: 250Mi
+    limits:
+      memory: 6000Mi

@@ -63,8 +63,8 @@ pod-gateway:
         - port: 57464
           type: tcp
 
-  # routed_namespaces:
-  #   - qbittorrent
+  routed_namespaces:
+    - qbittorrent
   #   - prowlarr
   #   - sabnzbd
 
