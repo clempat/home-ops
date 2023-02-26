@@ -73,6 +73,8 @@ apps:
   - name: pod-gateway
     path: kubernetes/networking
     namespace: networking
+  - name: qbittorrent
+    path: kubernetes/media
   # - name: home-assistant
   #   path: kubernetes/home
   #   namespace: home
