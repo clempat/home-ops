@@ -73,6 +73,11 @@ apps:
   - name: pod-gateway
     path: kubernetes/networking
     namespace: networking
+    ignoreDifferences:
+      - group: cert-manager.io
+        kind: Certificate
+        jsonPointers:
+          - /spec/duration
   - name: qbittorrent
     path: kubernetes/media
   - name: theme-park
