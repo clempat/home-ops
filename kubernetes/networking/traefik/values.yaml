@@ -2,12 +2,18 @@
 traefik:
   additionalArguments:
     - "--providers.kubernetesingress.ingressendpoint.publishedservice=networking/traefik"
+    - "--experimental.plugins.theme-park.modulename=github.com/traefik/theme-park"
+    - "--experimental.plugins.theme-park.version=v1.2.0"
   service:
     spec:
       externalTrafficPolicy: Local
       loadBalancerIP: "192.168.40.2"
     annotations:
       metallb.universe.tf/allow-shared-ip: traefik
+
+  experimental:
+    plugins:
+      enabled: true
 
   metrics:
     prometheus:
