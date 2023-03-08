@@ -4,7 +4,7 @@ pod-gateway:
     annotations:
       reloader.stakater.com/auto: "true"
 
-  DNS: 172.16.1.1
+  # DNS: 172.16.1.1
 
   image:
     repository: ghcr.io/angelnu/pod-gateway
@@ -12,7 +12,7 @@ pod-gateway:
 
   addons:
     vpn:
-      enabled: false
+      enabled: true
       type: gluetun
       image:
         # TODO: Replace with ghcr.io/qdm12/gluetun when a versioned tag is available
@@ -37,7 +37,7 @@ pod-gateway:
         - secretRef:
             name: mullvad
       networkPolicy:
-        enabled: false
+        enabled: true
         egress:
           - ports:
               - port: 51820
