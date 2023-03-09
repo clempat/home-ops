@@ -4,7 +4,7 @@ pod-gateway:
     annotations:
       reloader.stakater.com/auto: "true"
 
-  DNS: 172.16.1.1
+  DNS: 172.16.0.1
 
   image:
     repository: ghcr.io/angelnu/pod-gateway
@@ -79,7 +79,7 @@ pod-gateway:
     VPN_LOCAL_CIDRS: 10.0.0.0/8 192.168.0.0/16
     VPN_TRAFFIC_PORT: *port
     VXLAN_ID: 43
-    VXLAN_IP_NETWORK: 172.16.1
+    VXLAN_IP_NETWORK: 172.16.0
 
   webhook:
     gatewayAnnotation: setGateway
