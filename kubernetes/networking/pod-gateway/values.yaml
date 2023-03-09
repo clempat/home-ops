@@ -33,6 +33,8 @@ pod-gateway:
           value: Frankfurt
         - name: SERVER_HOSTNAMES
           value: de4-wireguard
+        - name: FIREWALL_VPN_INPUT_PORTS
+          value: &port "51820"
       envFrom:
         - secretRef:
             name: mullvad
@@ -40,7 +42,7 @@ pod-gateway:
         enabled: true
         egress:
           - ports:
-              - port: 51820
+              - port: *port
                 protocol: UDP
             to:
               - ipBlock:
@@ -71,11 +73,11 @@ pod-gateway:
   #   - sabnzbd
 
   settings:
-    NOT_ROUTED_TO_GATEWAY_CIDRS: 10.0.0.0/8 192.168.0.0/16 172.16.0.0/12
+    NOT_ROUTED_TO_GATEWAY_CIDRS: 10.0.0.0/8 192.168.0.0/16
     VPN_BLOCK_OTHER_TRAFFIC: true
     VPN_INTERFACE: wg0
-    VPN_LOCAL_CIDRS: 10.0.0.0/8 192.168.0.0/16 172.16.0.0/12
-    VPN_TRAFFIC_PORT: "51820"
+    VPN_LOCAL_CIDRS: 10.0.0.0/8 192.168.0.0/16
+    VPN_TRAFFIC_PORT: *port
     VXLAN_ID: 43
     VXLAN_IP_NETWORK: 172.16.1
 
