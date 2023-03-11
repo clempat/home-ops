@@ -69,7 +69,7 @@ pod-gateway:
 
   routed_namespaces:
     - qbittorrent
-    - prowlarr
+    # - prowlarr
   #   - sabnzbd
 
   settings:
