@@ -10,3 +10,8 @@ spec:
       content-security-policy: ""
       X-Frame-Options: ""
       Accept-Encoding: ""
+  plugin:
+    theme-park:
+      baseUrl: "theme-park.{{ .Values.custom.domain }}"
+      app: qbittorrent
+      theme: dracula
