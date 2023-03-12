@@ -5,13 +5,20 @@ metadata:
   name: qbittorrent
 spec:
   headers:
-    customRequestHeaders:
+    customResponseHeaders:
       x-webkit-csp: ""
       content-security-policy: ""
       X-Frame-Options: ""
       Accept-Encoding: ""
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: theme
+spec:
   plugin:
     theme-park:
-      baseUrl: "theme-park.{{ .Values.custom.domain }}"
+      baseUrl: "https://theme-park.{{ .Values.custom.domain }}"
       app: qbittorrent
       theme: dracula
