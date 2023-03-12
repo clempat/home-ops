@@ -13,6 +13,9 @@ app-template:
     type: Recreate
   env:
     TZ: "Europe/Berlin"
+  envFrom:
+    - secretRef:
+        name: home-assistant-secret
   hostNetwork: true
   dnsPolicy: ClusterFirstWithHostNet
 
