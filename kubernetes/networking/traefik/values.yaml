@@ -2,8 +2,8 @@
 traefik:
   additionalArguments:
     - "--providers.kubernetesingress.ingressendpoint.publishedservice=networking/traefik"
-    - "--experimental.plugins.theme-park.modulename=github.com/traefik/theme-park"
-    - "--experimental.plugins.theme-park.version=v1.2.0"
+    - "--experimental.plugins.theme-park.modulename=github.com/packruler/traefik-themepark"
+    - "--experimental.plugins.theme-park.version=v1.2.2"
   service:
     spec:
       externalTrafficPolicy: Local
