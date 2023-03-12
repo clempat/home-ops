@@ -72,8 +72,6 @@ app-template:
 
   volumeClaimTemplates:
     - name: config
-      apiVersion: v1
-      kind: PersistentVolumeClaim
       mountPath: /config
       accessMode: ReadWriteOnce
       size: 10Gi
@@ -111,7 +109,7 @@ app-template:
           hajimari.io/enable: "true"
           hajimari.io/info: VS Code for HASS configuration editing
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: networking-authelia@kubernetescrd
       volumeMounts:
         - name: config
           mountPath: /config
