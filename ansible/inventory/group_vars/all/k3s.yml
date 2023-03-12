@@ -4,6 +4,11 @@
 # ...see https://github.com/PyratLabs/ansible-role-k3s
 #
 
+# Some Calico Configurations
+calico_bgp_peer_ip: 192.168.40.1
+calico_bgp_as_number: 64512
+calico_bgp_external_ips: 192.168.69.0/24
+
 # (string) Use a specific version of k3s
 # renovate: datasource=github-releases depName=k3s-io/k3s
 k3s_release_version: "v1.26.1+k3s1"
@@ -56,4 +61,6 @@ k3s_server_manifests_urls:
 # /var/lib/rancher/k3s/server/manifests
 k3s_server_manifests_templates:
   - calico-installation.yaml.j2
+  - calico-bgpconfiguration.yaml.j2
+  - calico-bgppeer.yaml.j2
   - kube-vip-daemonset.yaml.j2
