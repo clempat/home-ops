@@ -88,6 +88,6 @@ apps:
   - name: k8s-gateway
     path: kubernetes/networking
     namespace: networking
-  - name: home-assistant
-    path: kubernetes/home
-    namespace: home
+  # - name: home-assistant
+  #   path: kubernetes/home
+  #   namespace: home
