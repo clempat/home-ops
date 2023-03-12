@@ -4,6 +4,8 @@ kind: Middleware
 metadata:
   name: prowlarr
 spec:
-  headers:
-    customResponseHeaders:
-      X-Custom-Response-Header: "value"
+  plugin:
+    theme-park:
+      app: prowlarr
+      theme: dracula
+      baseUrl: "{{ .Values.baseUrl }}"
