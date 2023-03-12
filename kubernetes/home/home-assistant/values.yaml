@@ -72,6 +72,8 @@ app-template:
 
   volumeClaimTemplates:
     - name: config
+      apiVersion: v1
+      kind: PersistentVolumeClaim
       mountPath: /config
       accessMode: ReadWriteOnce
       size: 10Gi
