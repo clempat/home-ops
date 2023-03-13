@@ -30,7 +30,7 @@ app-template:
   securityContext:
     privileged: true
   nodeSelector:
-    sonoff.feature.node.kubernetes.io/zigbee: "true"
+    feature.node.kubernetes.io/usb-ff_10c4_ea60.present: "true"
   persistence:
     config:
       enabled: true
