@@ -93,3 +93,5 @@ apps:
   - name: node-feature-discovery
     path: kubernetes/system
     namespace: system
+  - name: zigbee2mqtt
+    path: kubernetes/home
