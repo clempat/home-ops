@@ -90,4 +90,3 @@ apps:
     namespace: networking
   - name: home-assistant
     path: kubernetes/home
-    namespace: home
