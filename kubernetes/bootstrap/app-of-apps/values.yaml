@@ -90,3 +90,6 @@ apps:
     namespace: networking
   - name: home-assistant
     path: kubernetes/home
+  - name: node-feature-discovery
+    path: kubernetes/system
+    namespace: system
