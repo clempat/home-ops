@@ -95,3 +95,5 @@ apps:
     namespace: system
   - name: zigbee2mqtt
     path: kubernetes/home
+  - name: zwave-js-ui
+    path: kubernetes/home

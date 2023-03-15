@@ -9,7 +9,8 @@ resource "unifi_network" "homelab" {
   dhcp_lease          = 0
   dhcp_relay_enabled  = false
   dhcpd_boot_enabled  = false
-  igmp_snooping       = false
+  igmp_snooping       = true
+  multicast_dns       = true
   ipv6_interface_type = "none"
   ipv6_ra_enable      = false
   network_group       = "LAN"

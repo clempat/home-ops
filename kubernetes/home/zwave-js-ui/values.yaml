@@ -1,0 +1,65 @@
+---
+app-template:
+  controller:
+    type: statefulset
+  image:
+    repository: ghcr.io/zwave-js/zwave-js-ui
+    tag: 8.10.1
+  env:
+    TZ: Europe/Berlin
+  service:
+    main:
+      ports:
+        http:
+          port: &port 8091
+        websocket:
+          enabled: true
+          port: 3000
+  serviceMonitor:
+    main:
+      enabled: true
+  probes:
+    liveness: &probes
+      enabled: true
+      custom: true
+      spec:
+        httpGet:
+          path: /health
+          port: *port
+        initialDelaySeconds: 0
+        periodSeconds: 10
+        timeoutSeconds: 1
+        failureThreshold: 3
+    readiness: *probes
+    startup:
+      enabled: false
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        nginx.ingress.kubernetes.io/whitelist-source-range: |
+          10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+        hajimari.io/icon: mdi:z-wave
+  securityContext:
+    privileged: true
+  volumeClaimTemplates:
+    - name: config
+      mountPath: /usr/src/app/store
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      storageClass: longhorn
+  persistence:
+    usb:
+      enabled: true
+      type: hostPath
+      hostPath: /dev/serial/by-id/usb-0658_0200-if00
+      hostPathType: CharDevice
+  nodeSelector:
+    aeotec.feature.node.kubernetes.io/zwave: "true"
+  resources:
+    requests:
+      cpu: 10m
+      memory: 100Mi
+    limits:
+      memory: 500Mi
