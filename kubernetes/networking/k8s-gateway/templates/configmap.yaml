@@ -17,7 +17,7 @@ spec:
         Corefile: |
           .:1053 {
             errors
-            forward . 192.168.30.198
+            forward . 192.168.30.69
             log
             health {
               lameduck 5s
