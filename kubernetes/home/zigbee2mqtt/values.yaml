@@ -27,7 +27,7 @@ app-template:
       ingressClassName: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.middlewares: traefik-authelia@kubernetescrd
+        traefik.ingress.kubernetes.io/router.middlewares: networking-authelia@kubernetescrd
         hajimari.io/enable: "true"
         hajimari.io/icon: zigbee
         hajimari.io/appName: Zigbee2MQTT
