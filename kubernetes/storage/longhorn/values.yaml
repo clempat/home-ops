@@ -6,3 +6,15 @@ longhorn:
     nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
     defaultSettings.defaultReplicaCount: 2
     backupTarget: nfs://192.168.30.4:/mnt/HDD/Backups/Longhorn
+  longhornManager:
+    tolerations:
+      - effect: "NoExecute"
+        operator: "Exists"
+      - effect: "NoSchedule"
+        operator: "Exists"
+  longhornDriver:
+    tolerations:
+      - effect: "NoExecute"
+        operator: "Exists"
+      - effect: "NoSchedule"
+        operator: "Exists"

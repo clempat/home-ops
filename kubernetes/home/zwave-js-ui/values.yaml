@@ -53,7 +53,7 @@ app-template:
       mountPath: /usr/src/app/store
       accessMode: ReadWriteOnce
       size: 1Gi
-      storageClass: local-hostpath
+      storageClass: longhorn
   persistence:
     usb:
       enabled: true
