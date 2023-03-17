@@ -1,7 +1,12 @@
 ---
 kubernetes:
   children:
-    agent:
+    rpi:
       hosts:
         rpi-node-1:
           ansible_host: "192.168.40.31"
+        rpi-node-2:
+          ansible_host: "192.168.40.32"
+      vars:
+        ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
+        ansible_user: "ubuntu"

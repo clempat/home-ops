@@ -8,6 +8,11 @@ app-template:
   image:
     repository: ghcr.io/koenkk/zigbee2mqtt
     tag: 1.30.2
+  tolerations:
+    - key: "hardware"
+      operator: "Equal"
+      value: "rpi"
+      effect: "NoExecute"
   envFrom:
     - secretRef:
         name: zigbee2mqtt-secret

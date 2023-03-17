@@ -7,6 +7,11 @@ app-template:
     tag: 8.10.1
   env:
     TZ: Europe/Berlin
+  tolerations:
+    - key: "hardware"
+      operator: "Equal"
+      value: "rpi"
+      effect: "NoExecute"
   service:
     main:
       ports:

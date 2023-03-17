@@ -85,6 +85,12 @@ kube-prometheus-stack:
       enabled: true
       https: true
       insecureSkipVerify: true
+  prometheus-node-exporter:
+    tolerations:
+      - effect: "NoExecute"
+        operator: "Exists"
+      - effect: "NoSchedule"
+        operator: "Exists"
   kubeProxy:
     enabled: true
   kubeEtcd:

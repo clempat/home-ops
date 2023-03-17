@@ -1,0 +1,6 @@
+---
+k3s_agent:
+  node-taint:
+    - "hardware=rpi:NoExecute"
+  node-label:
+    - "hardware=rpi"

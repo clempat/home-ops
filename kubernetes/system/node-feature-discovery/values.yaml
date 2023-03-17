@@ -1,6 +1,9 @@
 ---
 node-feature-discovery:
   worker:
+    tolerations:
+      - effect: "NoExecute"
+        operator: "Exists"
     config:
       core:
         sources: ["custom", "pci", "usb"]
