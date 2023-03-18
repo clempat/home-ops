@@ -46,3 +46,33 @@ app-template:
       accessMode: ReadWriteOnce
       size: 5Gi
       storageClass: longhorn
+
+  addons:
+    codeserver:
+      enabled: true
+      image:
+        repository: ghcr.io/coder/code-server
+        tag: 4.10.0
+      env:
+        TZ: Europe/Berlin
+      workingDir: /config
+      args:
+        - --auth
+        - "none"
+        - --user-data-dir
+        - "/config/.vscode"
+        - --extensions-dir
+        - "/config/.vscode"
+      ingress:
+        enabled: true
+        ingressClassName: traefik
+        annotations:
+          hajimari.io/appName: "Esphome Config"
+          hajimari.io/icon: cib:visual-studio-code
+          hajimari.io/enable: "true"
+          hajimari.io/info: VS Code for Esphome configuration editing
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: networking-authelia@kubernetescrd
+      volumeMounts:
+        - name: config
+          mountPath: /config
