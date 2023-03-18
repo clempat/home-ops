@@ -117,3 +117,5 @@ apps:
           - /metadata/volumeClaimTemplates/kind
   - name: external-services
     path: kubernetes/networking
+  - name: esphome
+    path: kubernetes/home
