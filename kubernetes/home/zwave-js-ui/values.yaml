@@ -41,8 +41,9 @@ app-template:
   ingress:
     main:
       enabled: true
-      ingressClassName: nginx
+      ingressClassName: traefik
       annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.middlewares: networking-authelia@kubernetescrd
         hajimari.io/icon: mdi:z-wave
   securityContext:
