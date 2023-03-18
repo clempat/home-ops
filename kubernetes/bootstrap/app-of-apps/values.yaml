@@ -115,3 +115,5 @@ apps:
         jsonPointers:
           - /metadata/volumeClaimTemplates/apiVersion
           - /metadata/volumeClaimTemplates/kind
+  - name: external-services
+    path: kubernetes/networking
