@@ -28,10 +28,31 @@ spec:
       valueFiles:
         - secrets+age-import-kubernetes://{{ $.Release.Namespace }}/{{ $.Values.gitops.secretName }}
     {{- end }}
+  {{- if $app.ignoreDifferences }}
+  ignoreDifferences:
+    {{- range $index, $ignore := $app.ignoreDifferences }}
+    - group: {{ $ignore.group }}
+      jsonPointers:
+        {{- range $index, $pointer := $ignore.jsonPointers }}
+        - {{ $pointer }}
+        {{- end }}
+      kind: {{ $ignore.kind }}
+      {{- if $ignore.name }}
+      name: {{ $ignore.name }}
+      {{- end }}
+      {{- if $ignore.namespace }}
+      namespace: {{ $ignore.namespace }}
+      {{- end }}
+      {{- if $ignore.cluster }}
+      cluster: {{ $ignore.cluster }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+  {{- if not (default false $app.disableSyncPolicy) }}
   syncPolicy:
     automated:
-      prune: true
-      selfHeal: true
+      prune: {{ default "true" $app.prune }}
+      selfHeal: {{ default "true" $app.selfHeal }}
     retry:
       limit: 10
       backoff:
@@ -42,4 +63,5 @@ spec:
       - CreateNamespace=true
       - ApplyOutOfSyncOnly=true
       - ServerSideApply=true
+  {{- end }}
 {{- end }}
