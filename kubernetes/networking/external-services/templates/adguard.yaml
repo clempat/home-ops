@@ -1,0 +1,35 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: adguard
+spec:
+  type: ExternalName
+  ports:
+    - port: 80
+      name: web
+  externalName: 192.168.40.254
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: adguard
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: &host adguard.{{ .Values.custom.domain }}
+      http:
+        paths:
+          - backend:
+              service:
+                name: adguard
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - *host

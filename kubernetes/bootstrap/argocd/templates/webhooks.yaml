@@ -10,7 +10,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: {{ .Values.custom.externalWebhookHostname }}
+    - host: "{{ .Values.custom.externalWebhookHostname }}"
       http:
         paths:
           - backend:
