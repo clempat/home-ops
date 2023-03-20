@@ -61,12 +61,6 @@ apps:
   - name: snapshot-validation-webhook
     path: kubernetes/storage
     namespace: storage
-  - name: volsync
-    path: kubernetes/storage
-    namespace: storage
-  - name: democratic-csi-local
-    path: kubernetes/storage
-    namespace: storage
   - name: cloudnative-pg
     path: kubernetes/database
     namespace: database
