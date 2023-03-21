@@ -31,6 +31,9 @@ app-template:
         httpGet:
           path: /health
           port: *port
+          httpHeaders:
+            - name: Accept
+              value: text/plain
         initialDelaySeconds: 0
         periodSeconds: 10
         timeoutSeconds: 1
