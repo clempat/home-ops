@@ -115,3 +115,5 @@ apps:
     path: kubernetes/home
   - name: local-storage
     path: kubernetes/storage
+  - name: cloudflare-ddns
+    path: kubernetes/networking
