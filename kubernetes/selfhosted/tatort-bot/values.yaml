@@ -3,6 +3,10 @@ app-template:
   image:
     repository: "ghcr.io/clempat/tatort-telegram-bot"
     tag: main
+  controller:
+    type: statefulset
+    annotations:
+      reloader.stakater.com/auto: "true"
   service:
     main:
       enabled: false

@@ -1,0 +1,73 @@
+app-template:
+  initContainers:
+    01-init-db:
+      image: ghcr.io/onedr0p/postgres-initdb:14.7
+      imagePullPolicy: IfNotPresent
+      envFrom:
+        - secretRef:
+            name: n8n-secret
+  controller:
+    type: statefulset
+    annotations:
+      reloader.stakater.com/auto: "true"
+  image:
+    repository: ghcr.io/n8n-io/n8n
+    tag: 0.220.1
+  command: ["n8n"]
+  env:
+    GENERIC_TIMEZONE: Europe/Berlin
+    TZ: Europe/Berlin
+    N8N_PORT: &port 80
+    N8N_EMAIL_MODE: smtp
+    N8N_SMTP_HOST: smtp.fastmail.com
+    N8N_SMTP_PORT: 465
+    N8N_METRICS: "true"
+  envFrom:
+    - secretRef:
+        name: n8n-secret
+  service:
+    main:
+      ports:
+        http:
+          port: *port
+  probes:
+    liveness: &probes
+      enabled: true
+      custom: true
+      spec:
+        httpGet:
+          path: /healthz
+          port: *port
+        initialDelaySeconds: 0
+        periodSeconds: 10
+        timeoutSeconds: 1
+        failureThreshold: 3
+    readiness: *probes
+    startup:
+      enabled: false
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        external-dns/is-public: "true"
+        nginx.ingress.kubernetes.io/whitelist-source-range: |
+          10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+        hajimari.io/icon: mdi:workflow
+  podSecurityContext:
+    runAsUser: 568
+    runAsGroup: 568
+    fsGroup: 568
+    fsGroupChangePolicy: "OnRootMismatch"
+  volumeClaimTemplates:
+    - name: config
+      mountPath: /config
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      storageClass: longhorn
+  resources:
+    requests:
+      cpu: 10m
+      memory: 200Mi
+    limits:
+      memory: 1000Mi
