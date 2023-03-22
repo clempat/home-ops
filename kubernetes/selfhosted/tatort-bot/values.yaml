@@ -1,0 +1,11 @@
+---
+app-template:
+  image:
+    repository: "ghcr.io/clempat/tatort-telegram-bot"
+    tag: main
+  service:
+    main:
+      enabled: false
+  envFrom:
+    - secretRef:
+        name: tatort-bot-secrets
