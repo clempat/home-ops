@@ -8,6 +8,10 @@ spec:
   ports:
     - port: 80
       name: web
+    - port: 9001
+      name: minioe-console
+    - port: 9003
+      name: minioe
   externalName: 192.168.30.4
 
 ---
@@ -28,6 +32,29 @@ spec:
                 name: truenas
                 port:
                   number: 80
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - *host
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minioe-console
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: &host s3.{{ .Values.custom.domain }}
+      http:
+        paths:
+          - backend:
+              service:
+                name: truenas
+                port:
+                  number: 9001
             path: /
             pathType: Prefix
   tls:
