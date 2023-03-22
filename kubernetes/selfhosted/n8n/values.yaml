@@ -53,11 +53,6 @@ app-template:
         nginx.ingress.kubernetes.io/whitelist-source-range: |
           10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
         hajimari.io/icon: mdi:workflow
-  podSecurityContext:
-    runAsUser: 568
-    runAsGroup: 568
-    fsGroup: 568
-    fsGroupChangePolicy: "OnRootMismatch"
   volumeClaimTemplates:
     - name: config
       mountPath: /home/node/.n8n
