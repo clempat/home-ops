@@ -3,6 +3,8 @@ app-template:
   image:
     repository: "ghcr.io/clempat/tatort-telegram-bot"
     tag: main
+  nodeSelector:
+    "kubernetes.io/arch": "amd64"
   controller:
     type: statefulset
     annotations:
