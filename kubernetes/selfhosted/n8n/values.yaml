@@ -13,7 +13,6 @@ app-template:
   image:
     repository: ghcr.io/n8n-io/n8n
     tag: 0.220.1
-  command: ["n8n"]
   env:
     GENERIC_TIMEZONE: Europe/Berlin
     TZ: Europe/Berlin
@@ -61,7 +60,7 @@ app-template:
     fsGroupChangePolicy: "OnRootMismatch"
   volumeClaimTemplates:
     - name: config
-      mountPath: /config
+      mountPath: /home/node/.n8n
       accessMode: ReadWriteOnce
       size: 1Gi
       storageClass: longhorn
