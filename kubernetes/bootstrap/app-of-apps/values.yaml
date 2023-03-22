@@ -113,3 +113,5 @@ apps:
     path: kubernetes/networking
   - name: esphome
     path: kubernetes/home
+  - name: local-storage
+    path: kubernetes/storage
