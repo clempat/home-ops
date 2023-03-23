@@ -1,0 +1,35 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: proxmox
+spec:
+  type: ExternalName
+  ports:
+    - port: 8006
+      name: proxmox
+  externalName: 192.168.30.8
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: proxmox
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: &host proxmox.{{ .Values.custom.domain }}
+      http:
+        paths:
+          - backend:
+              service:
+                name: proxmox
+                port:
+                  number: 8006
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - *host

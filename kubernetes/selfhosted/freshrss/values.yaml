@@ -6,6 +6,8 @@ app-template:
     tag: 1.20.2
   strategy:
     type: Recreate
+  nodeSelector:
+    "kubernetes.io/arch": "amd64"
   env:
     TZ: Europe/Berlin
     CRON_MIN: "18,48"
@@ -23,16 +25,7 @@ app-template:
       annotations:
         hajimari.io/enable: "true"
         hajimari.io/icon: "rss-box"
-        hajimari.io/instance: "internal"
         hajimari.io/group: "News"
-    external:
-      enabled: true
-      ingressClassName: traefik
-      annotations:
-        hajimari.io/enable: "true"
-        hajimari.io/icon: "rss-box"
-        hajimari.io/instance: "external"
-        hajimari.io/appName: "FreshRSS"
   persistence:
     config:
       enabled: true

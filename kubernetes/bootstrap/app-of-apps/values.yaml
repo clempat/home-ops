@@ -54,7 +54,6 @@ apps:
     namespace: home
   - name: freshrss
     path: kubernetes/selfhosted
-    namespace: selfhosted
   - name: snapshot-controller
     path: kubernetes/storage
     namespace: storage
@@ -120,4 +119,6 @@ apps:
   - name: tatort-bot
     path: kubernetes/selfhosted
   - name: n8n
+    path: kubernetes/selfhosted
+  - name: recipes
     path: kubernetes/selfhosted
