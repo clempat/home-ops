@@ -4,6 +4,7 @@ traefik:
     - "--providers.kubernetesingress.ingressendpoint.publishedservice=networking/traefik"
     - "--experimental.plugins.theme-park.modulename=github.com/packruler/traefik-themepark"
     - "--experimental.plugins.theme-park.version=v1.2.2"
+    - "--serverstransport.insecureskipverify=true"
   service:
     spec:
       externalTrafficPolicy: Local
