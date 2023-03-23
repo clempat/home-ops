@@ -139,7 +139,7 @@ spec:
                     - email
                     - profile
                   redirect_uris:
-                    - https://recipes.{{ `{{.homelab_domain}}` }}
+                    - https://recipes.{{ `{{.homelab_domain}}` }}/accounts/authelia/login/callback/
                   userinfo_signing_algorithm: none
                 - id: nextcloud
                   description: NextCloud
