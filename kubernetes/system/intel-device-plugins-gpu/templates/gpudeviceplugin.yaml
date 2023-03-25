@@ -1,0 +1,14 @@
+---
+apiVersion: deviceplugin.intel.com/v1
+kind: GpuDevicePlugin
+metadata:
+  name: intel-gpu-plugin
+spec:
+  image: intel/intel-gpu-plugin:0.26.0
+  initImage: intel/intel-gpu-initcontainer:0.26.0
+  logLevel: 2
+  sharedDevNum: 1
+  preferredAllocationPolicy: none
+
+  nodeSelector:
+    intel.feature.node.kubernetes.io/gpu: "true"

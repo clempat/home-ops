@@ -122,3 +122,5 @@ apps:
     path: kubernetes/selfhosted
   - name: recipes
     path: kubernetes/selfhosted
+  - name: intel-device-plugins-gpu
+    path: kubernetes/system
