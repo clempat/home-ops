@@ -124,3 +124,5 @@ apps:
     path: kubernetes/selfhosted
   - name: intel-device-plugins-gpu
     path: kubernetes/system
+  - name: intel-device-plugins-operator
+    path: kubernetes/system
