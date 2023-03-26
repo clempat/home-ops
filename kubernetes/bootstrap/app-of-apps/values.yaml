@@ -126,3 +126,5 @@ apps:
     path: kubernetes/system
   - name: intel-device-plugins-operator
     path: kubernetes/system
+  - name: bazarr
+    path: kubernetes/media

@@ -1,0 +1,47 @@
+---
+app-template:
+  controller:
+    replicas: 1
+    type: statefulset
+  image:
+    repository: ghcr.io/onedr0p/bazarr
+    tag: 1.2.0
+  env:
+    TZ: Europe/Berlin
+  service:
+    main:
+      ports:
+        http:
+          port: 6767
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: networking-authelia@kubernetescrd
+        hajimari.io/enable: "true"
+        hajimari.io/icon: subtitles
+        hajimari.io/appName: Bazarr
+        hajimari.io/info: Manages and downloads subtitles based on your requirements
+  podSecurityContext:
+    runAsUser: 1028
+    runAsGroup: 100
+    fsGroup: 100
+    fsGroupChangePolicy: "OnRootMismatch"
+  persistence:
+    config:
+      enabled: true
+      existingClaim: bazarr
+    data:
+      enabled: true
+      type: nfs
+      server: 192.168.30.4
+      path: /mnt/HDD/media
+      mountPath: /data
+  resources:
+    requests:
+      cpu: 10m
+      memory: 250Mi
+    limits:
+      memory: 1000Mi
