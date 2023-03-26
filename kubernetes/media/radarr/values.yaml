@@ -1,0 +1,53 @@
+---
+app-template:
+  controller:
+    replicas: 1
+    type: statefulset
+  image:
+    repository: ghcr.io/onedr0p/radarr-develop
+    tag: 4.4.2.6956
+  env:
+    TZ: Europe/Berlin
+    RADARR__INSTANCE_NAME: Radarr
+    RADARR__PORT: &port 80
+    RADARR__LOG_LEVEL: info
+  envFrom:
+    - secretRef:
+        name: radarr-secret
+  service:
+    main:
+      ports:
+        http:
+          port: *port
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: networking-authelia@kubernetescrd
+        hajimari.io/enable: "true"
+        hajimari.io/icon: filmstrip
+        hajimari.io/appName: Radarr
+        hajimari.io/info: Movie collection manager for Usenet and BitTorrent users
+  podSecurityContext:
+    runAsUser: 1028
+    runAsGroup: 100
+    fsGroup: 100
+    fsGroupChangePolicy: "OnRootMismatch"
+  persistence:
+    config:
+      enabled: true
+      existingClaim: radarr
+    data:
+      enabled: true
+      type: nfs
+      server: 192.168.30.4
+      path: /mnt/HDD/media
+      mountPath: /data
+  resources:
+    requests:
+      cpu: 10m
+      memory: 250Mi
+    limits:
+      memory: 750Mi
