@@ -130,3 +130,7 @@ apps:
     path: kubernetes/media
   - name: radarr
     path: kubernetes/media
+  - name: recyclarr
+    path: kubernetes/media
+  - name: sonarr
+    path: kubernetes/media

@@ -1,0 +1,68 @@
+---
+app-template:
+  controller:
+    replicas: 1
+    type: statefulset
+  image:
+    repository: ghcr.io/onedr0p/sonarr-develop
+    tag: 4.0.0.412
+  env:
+    TZ: Europe/Berlin
+    SONARR__INSTANCE_NAME: Sonarr
+    SONARR__PORT: &port 80
+    SONARR__LOG_LEVEL: info
+  envFrom:
+    - secretRef:
+        name: sonarr-secret
+  service:
+    main:
+      ports:
+        http:
+          port: *port
+  probes:
+    liveness: &probes
+      enabled: true
+      custom: true
+      spec:
+        httpGet:
+          path: /ping
+          port: *port
+        initialDelaySeconds: 0
+        periodSeconds: 10
+        timeoutSeconds: 1
+        failureThreshold: 3
+    readiness: *probes
+    startup:
+      enabled: false
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: networking-authelia@kubernetescrd
+        hajimari.io/enable: "true"
+        hajimari.io/icon: television
+        hajimari.io/appName: Sonarr
+        hajimari.io/info: TV show collection manager for Usenet and BitTorrent users
+  podSecurityContext:
+    runAsUser: 1028
+    runAsGroup: 100
+    fsGroup: 100
+    fsGroupChangePolicy: "OnRootMismatch"
+  persistence:
+    config:
+      enabled: true
+      existingClaim: sonarr
+    data:
+      enabled: true
+      type: nfs
+      server: 192.168.30.4
+      path: /mnt/HDD/media
+      mountPath: /data
+  resources:
+    requests:
+      cpu: 10m
+      memory: 250Mi
+    limits:
+      memory: 1000Mi
