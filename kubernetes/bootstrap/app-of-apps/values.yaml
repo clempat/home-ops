@@ -138,3 +138,5 @@ apps:
     path: kubernetes/media
   - name: jellyfin
     path: kubernetes/media
+  - name: jellyseer
+    path: kubernetes/media

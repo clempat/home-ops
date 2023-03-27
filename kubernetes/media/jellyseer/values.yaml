@@ -1,0 +1,40 @@
+---
+app-template:
+  image:
+    repository: docker.io/fallenbagel/jellyseerr
+    tag: 1.4.1
+  env:
+    TZ: Europe/Berlin
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: "traefik"
+      annotations:
+        hajimari.io/icon: "jellyfish" # Hajimari dashboard custom icon
+        hajimari.io/appName: "JellySeerr"
+        hajimari.io/enable: "true"
+        traefik.ingress.kubernetes.io/router.entrypoints: "websecure" # Use HTTPS
+  service:
+    main:
+      ports:
+        http:
+          port: 5055
+  podSecurityContext:
+    runAsUser: 568
+    runAsGroup: 568
+    fsGroup: 568
+    fsGroupChangePolicy: "OnRootMismatch"
+    supplementalGroups:
+      - 100
+  persistence:
+    config:
+      enabled: true
+      existingClaim: jellyseerr-config-v1
+      mountPath: /app/config
+  resources:
+    requests:
+      memory: 210Mi
+      cpu: 20m
+    limits:
+      memory: 210Mi
+      cpu: 20m
