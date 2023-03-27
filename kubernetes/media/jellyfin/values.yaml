@@ -7,7 +7,6 @@ app-template:
     tag: 10.8.9@sha256:01a6497a1290b73f63251aebe6d01327c15b3413c3e1013c2a396ffe116ced4d
   env:
     TZ: Europe/Berlin
-    JELLYFIN_PublishedServerUrl: https://jellyfin.devbu.io
   service:
     main:
       ports:
@@ -34,7 +33,7 @@ app-template:
   ingress:
     main:
       enabled: true
-      ingressClassName: nginx
+      ingressClassName: traefik
       annotations:
         hajimari.io/icon: simple-icons:jellyfin
   podSecurityContext:
@@ -61,7 +60,6 @@ app-template:
       enabled: true
       type: emptyDir
   nodeSelector:
-    node-role.kubernetes.io/worker: "true"
     intel.feature.node.kubernetes.io/gpu: "true"
   resources:
     requests:
