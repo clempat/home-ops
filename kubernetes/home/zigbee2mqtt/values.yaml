@@ -34,6 +34,9 @@ app-template:
         hajimari.io/info: Zigbee to MQTT bridge
   securityContext:
     privileged: true
+  podSecurityContext:
+    supplementalGroups:
+      - 20
   nodeSelector:
     feature.node.kubernetes.io/usb-ff_10c4_ea60.present: "true"
   persistence:
@@ -45,7 +48,6 @@ app-template:
       enabled: true
       type: hostPath
       hostPath: /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_28f99eb10f86ec11903e631719c2d21c-if00-port0
-      hostPathType: CharDevice
   resources:
     requests:
       cpu: 10m
