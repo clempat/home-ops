@@ -1,0 +1,73 @@
+---
+app-template:
+  controller:
+    type: statefulset
+  image:
+    repository: ghcr.io/onedr0p/jellyfin
+    tag: 10.8.9@sha256:01a6497a1290b73f63251aebe6d01327c15b3413c3e1013c2a396ffe116ced4d
+  env:
+    TZ: Europe/Berlin
+    JELLYFIN_PublishedServerUrl: https://jellyfin.devbu.io
+  service:
+    main:
+      ports:
+        http:
+          port: &port 8096
+  # serviceMonitor:
+  #   main:
+  #     enabled: true
+  probes:
+    liveness: &probes
+      enabled: true
+      custom: true
+      spec:
+        httpGet:
+          path: /health
+          port: *port
+        initialDelaySeconds: 0
+        periodSeconds: 10
+        timeoutSeconds: 1
+        failureThreshold: 3
+    readiness: *probes
+    startup:
+      enabled: false
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        hajimari.io/icon: simple-icons:jellyfin
+  podSecurityContext:
+    runAsUser: 568
+    runAsGroup: 568
+    fsGroup: 568
+    fsGroupChangePolicy: OnRootMismatch
+    supplementalGroups: [44, 109, 10000]
+  volumeClaimTemplates:
+    - name: config
+      mountPath: /config
+      accessMode: ReadWriteOnce
+      size: 5Gi
+      storageClass: longhorn
+  persistence:
+    data:
+      enabled: true
+      type: nfs
+      server: 192.168.30.4
+      path: /mnt/HDD/media
+      mountPath: /data
+      readOnly: true
+    transcode:
+      enabled: true
+      type: emptyDir
+  nodeSelector:
+    node-role.kubernetes.io/worker: "true"
+    intel.feature.node.kubernetes.io/gpu: "true"
+  resources:
+    requests:
+      gpu.intel.com/i915: 1
+      cpu: 100m
+      memory: 1000Mi
+    limits:
+      gpu.intel.com/i915: 1
+      memory: 6000Mi

@@ -136,3 +136,5 @@ apps:
     path: kubernetes/media
   - name: unpackerr
     path: kubernetes/media
+  - name: jellyfin
+    path: kubernetes/media
