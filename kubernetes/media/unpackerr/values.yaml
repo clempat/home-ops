@@ -1,0 +1,45 @@
+---
+app-template:
+  controller:
+    annotations:
+      reloader.stakater.com/auto: "true"
+  image:
+    repository: ghcr.io/onedr0p/unpackerr
+    tag: 0.11.1
+  env:
+    TZ: Europe/Berlin
+  service:
+    main:
+      enabled: false
+  probes:
+    liveness:
+      enabled: false
+    readiness:
+      enabled: false
+    startup:
+      enabled: false
+  podSecurityContext:
+    runAsUser: 1028
+    runAsGroup: 100
+    fsGroup: 100
+    fsGroupChangePolicy: "OnRootMismatch"
+  persistence:
+    config:
+      enabled: true
+      type: configMap
+      name: unpackerr-config
+      mountPath: /config/unpackerr.conf
+      subPath: unpackerr.conf
+      readOnly: true
+    data:
+      enabled: true
+      type: nfs
+      server: 192.168.30.4
+      path: /mnt/HDD/media
+      mountPath: /data
+  resources:
+    requests:
+      cpu: 10m
+      memory: 250Mi
+    limits:
+      memory: 1000Mi

@@ -1,0 +1,57 @@
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: unpackerr
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: onepassword-connect
+  target:
+    name: unpackerr-config
+    creationPolicy: Owner
+    template:
+      engineVersion: v2
+      data:
+        unpackerr.conf: |-
+          debug = true
+          [[sonarr]]
+           url = "http://sonarr.sonarr.svc.cluster.local"
+           api_key = "{{ .sonarr.API_KEY }}"
+           paths = ["/data/torrents"]
+          [[radarr]]
+           url = "http://radarr.radarr.svc.cluster.local"
+           api_key = "{{ .sonarr.API_KEY }}"
+           paths = ["/data/torrents"]
+          [[webhook]]
+           template = "pushover"
+           name = "Pushover"
+           url = "https://api.pushover.net/1/messages.json"
+           channel = "{{ .pover_user_key }}"
+           token = "{{ .pover_media_api_token }}"
+           events = [3, 7]
+  dataFrom:
+    - extract:
+        key: Pushover
+        conversionStrategy: Default
+        decodingStrategy: None
+      rewrite:
+        - regexp:
+            source: "(.*)"
+            target: "pover_$1"
+    - extract:
+        key: Sonarr
+        conversionStrategy: Default
+        decodingStrategy: None
+      rewrite:
+        - regexp:
+            source: "(.*)"
+            target: "sonarr_$1"
+    - extract:
+        key: Radarr
+        conversionStrategy: Default
+        decodingStrategy: None
+      rewrite:
+        - regexp:
+            source: "(.*)"
+            target: "radarr_$1"
