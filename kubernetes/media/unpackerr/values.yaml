@@ -26,7 +26,7 @@ app-template:
   persistence:
     config:
       enabled: true
-      type: configMap
+      type: secret
       name: unpackerr-config
       mountPath: /config/unpackerr.conf
       subPath: unpackerr.conf
