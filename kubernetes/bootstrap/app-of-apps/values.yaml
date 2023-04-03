@@ -140,3 +140,5 @@ apps:
     path: kubernetes/media
   # - name: jellyseer
   #   path: kubernetes/media
+  - name: democratic-csi-local
+    path: kubernetes/storage
