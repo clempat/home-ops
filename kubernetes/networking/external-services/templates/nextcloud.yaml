@@ -17,6 +17,7 @@ metadata:
   name: nextcloud
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    external-dns.alpha.kubernetes.io/target: ipv4.{{ .Values.custom.domain }}
 spec:
   ingressClassName: traefik
   rules:
