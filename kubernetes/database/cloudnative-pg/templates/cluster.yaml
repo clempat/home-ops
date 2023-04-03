@@ -10,7 +10,7 @@ spec:
   primaryUpdateStrategy: unsupervised
   storage:
     size: 5Gi
-    storageClass: local-hostpath
+    storageClass: local-storage
   superuserSecret:
     name: cloudnative-pg-secret
   postgresql:
