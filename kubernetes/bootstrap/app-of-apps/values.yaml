@@ -142,5 +142,5 @@ apps:
   #   path: kubernetes/media
   - name: democratic-csi-local
     path: kubernetes/storage
-  - name: valheim
-    path: kubernetes/games
+  # - name: valheim
+  #   path: kubernetes/games
