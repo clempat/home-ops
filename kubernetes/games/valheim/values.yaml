@@ -1,0 +1,94 @@
+---
+app-template:
+  image:
+    repository: lloesche/valheim-server
+    tag: latest
+  env:
+    - name: SERVER_NAME
+      valueFrom:
+        secretKeyRef:
+          name: valheim-secret
+          key: SERVER_NAME
+    - name: WORLD_NAME
+      valueFrom:
+        secretKeyRef:
+          name: valheim-secret
+          key: WORLD_NAME
+    - name: SERVER_PASS
+      valueFrom:
+        secretKeyRef:
+          name: valheim-secret
+          key: SERVER_PASS
+    - name: DISCORD_WEBHOOK
+      valueFrom:
+        secretKeyRef:
+          name: valheim-secret
+          key: DISCORD_WEBHOOK
+    - name: TZ
+      value: "Europe/Berlin"
+    - name: SERVER_PORT
+      value: "2456"
+    - name: VALHEIM_LOG_FILTER_CONTAINS_Spawned
+      value: "Got character ZDOID from"
+    - name: ON_VALHEIM_LOG_FILTER_CONTAINS_Spawned
+      value: '{ read l; l=$${l//*ZDOID from /}; l=$${l// :*/}; msg="Player $l connected."; curl -sfSL -X POST -H "Content-Type: application/json" -d "{\"username\":\"Valheim\",\"content\":\"$msg\"}" "$DISCORD_WEBHOOK"; }'
+    - name: DISCORD_MESSAGE
+      value: "Starting Valheim Server"
+    - name: PRE_BOOTSTRAP_HOOK
+      value: 'curl -sfSL -X POST -H "Content-Type: application/json" -d "{\"username\":\"Valheim\",\"content\":\"$$(eval echo $$DISCORD_MESSAGE)\"}" "$$DISCORD_WEBHOOK"'
+    - name: STATUS_HTTP
+      value: "true"
+    - name: "BACKUPS_DIRECTORY"
+      value: "/backups"
+  persistence:
+    backups:
+      enable: true
+      type: nfs
+      server: 192.168.30.184
+      path: /mnt/HDD/Backups/valheim
+      mountPath: /backups
+    config:
+      enable: true
+      existingClaim: valheim-config
+      mountPath: /config
+    server:
+      enable: true
+      existingClaim: valheim-server
+      mountPath: /opt/valheim
+  service:
+    main:
+      # type: LoadBalancer
+      # externalTrafficPolicy: Cluster
+      # loadBalancerIP:
+      ports:
+        http:
+          enabled: false
+        valheim-1:
+          enabled: true
+          port: 2456
+          protocol: UDP
+          targetPort: 2456
+        valheim-2:
+          enabled: false
+          port: 2457
+          protocol: UDP
+          targetPort: 2457
+        valheim-3:
+          enabled: false
+          port: 2458
+          protocol: UDP
+          targetPort: 2458
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        hajimari.io/enable: "true"
+        hajimari.io/icon: bell-outline
+  nodeSelector:
+    intel.feature.node.kubernetes.io/gpu: "true"
+  resources:
+    limits:
+      memory: "7Gi"
+    requests:
+      memory: "5Gi"
