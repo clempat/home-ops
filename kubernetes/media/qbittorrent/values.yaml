@@ -49,29 +49,29 @@ app-template:
       path: /mnt/HDD/media
       subPath: torrent
       mountPath: /data
-  sidecars:
-    vuetorrent:
-      name: vuetorrent
-      image:
-        repository: registry.k8s.io/git-sync/git-sync
-        tag: v3.6.5
-      args:
-        - --repo
-        - https://github.com/WDaan/VueTorrent
-        - --branch
-        - latest-release
-        - --depth
-        - "1"
-        - --root
-        - /config
-        - --wait
-        - "86400"
-      volumeMounts:
-        - name: config
-          mountPath: /config
-      securityContext:
-        runAsUser: 568
-        runAsGroup: 568
+  # sidecars:
+  #   vuetorrent:
+  #     name: vuetorrent
+  #     image:
+  #       repository: registry.k8s.io/git-sync/git-sync
+  #       tag: v3.6.5
+  #     args:
+  #       - --repo
+  #       - https://github.com/WDaan/VueTorrent
+  #       - --branch
+  #       - latest-release
+  #       - --depth
+  #       - "1"
+  #       - --root
+  #       - /config
+  #       - --wait
+  #       - "86400"
+  #     volumeMounts:
+  #       - name: config
+  #         mountPath: /config
+  #     securityContext:
+  #       runAsUser: 568
+  #       runAsGroup: 568
   dnsConfig:
     options:
       - name: ndots
