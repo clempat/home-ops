@@ -1,16 +1,17 @@
 ---
-image:
-  repository: public.ecr.aws/emqx/emqx
-emqxConfig:
-  EMQX_ALLOW_ANONYMOUS: "false"
-  EMQX_AUTH__MNESIA__PASSWORD_HASH: plain
-service:
-  type: LoadBalancer
-  externalIPs: ["192.168.40.3"]
-  externalTrafficPolicy: Local
-metrics:
-  enabled: false
-persistence:
-  enabled: true
-  storageClassName: longhorn
-  size: 100Mi
+emqx:
+  image:
+    repository: public.ecr.aws/emqx/emqx
+  emqxConfig:
+    EMQX_ALLOW_ANONYMOUS: "false"
+    EMQX_AUTH__MNESIA__PASSWORD_HASH: plain
+  service:
+    type: LoadBalancer
+    externalIPs: ["192.168.40.3"]
+    externalTrafficPolicy: Local
+  metrics:
+    enabled: false
+  persistence:
+    enabled: true
+    storageClassName: longhorn
+    size: 100Mi
