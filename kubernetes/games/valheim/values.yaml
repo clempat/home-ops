@@ -3,7 +3,6 @@ app-template:
   image:
     repository: lloesche/valheim-server
     tag: latest
-  restartPolicy: Never
   env:
     - name: SERVER_NAME
       valueFrom:
@@ -45,7 +44,7 @@ app-template:
     backups:
       enable: true
       type: nfs
-      server: 192.168.30.184
+      server: 192.168.30.4
       path: /mnt/HDD/Backups/valheim
       mountPath: /backups
     config:
