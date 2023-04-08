@@ -3,6 +3,7 @@ app-template:
   image:
     repository: lloesche/valheim-server
     tag: latest
+  restartPolicy: Never
   env:
     - name: SERVER_NAME
       valueFrom:
