@@ -1,25 +1,25 @@
 ---
 app-template:
   image:
-    repository: lloesche/valheim-server
+    repository: mbround18/valheim
     tag: latest
   env:
-    - name: SERVER_NAME
+    - name: NAME
       valueFrom:
         secretKeyRef:
           name: valheim-secret
           key: SERVER_NAME
-    - name: WORLD_NAME
+    - name: WORLD
       valueFrom:
         secretKeyRef:
           name: valheim-secret
           key: WORLD_NAME
-    - name: SERVER_PASS
+    - name: PASSWORD
       valueFrom:
         secretKeyRef:
           name: valheim-secret
           key: SERVER_PASS
-    - name: DISCORD_WEBHOOK
+    - name: WEBHOOK_URL
       valueFrom:
         secretKeyRef:
           name: valheim-secret
@@ -28,33 +28,37 @@ app-template:
       value: "Europe/Berlin"
     - name: SERVER_PORT
       value: 2456
-    - name: VALHEIM_LOG_FILTER_CONTAINS_Spawned
-      value: "Got character ZDOID from"
-    - name: ON_VALHEIM_LOG_FILTER_CONTAINS_Spawned
-      value: '{ read l; l=$${l//*ZDOID from /}; l=$${l// :*/}; msg="Player $l connected."; curl -sfSL -X POST -H "Content-Type: application/json" -d "{\"username\":\"Valheim\",\"content\":\"$msg\"}" "$DISCORD_WEBHOOK"; }'
-    - name: DISCORD_MESSAGE
-      value: "Starting Valheim Server"
-    - name: PRE_BOOTSTRAP_HOOK
-      value: 'curl -sfSL -X POST -H "Content-Type: application/json" -d "{\"username\":\"Valheim\",\"content\":\"$$(eval echo $$DISCORD_MESSAGE)\"}" "$$DISCORD_WEBHOOK"'
-    - name: STATUS_HTTP
-      value: "true"
-    - name: "BACKUPS_DIRECTORY"
-      value: "/backups"
+    - name: AUTO_UPDATE
+      value: 1
+    - name: AUTO_UPDATE_PAUSE_WITH_PLAYERS
+      value: 1
+    # - name: VALHEIM_LOG_FILTER_CONTAINS_Spawned
+    #   value: "Got character ZDOID from"
+    # - name: ON_VALHEIM_LOG_FILTER_CONTAINS_Spawned
+    #   value: '{ read l; l=$${l//*ZDOID from /}; l=$${l// :*/}; msg="Player $l connected."; curl -sfSL -X POST -H "Content-Type: application/json" -d "{\"username\":\"Valheim\",\"content\":\"$msg\"}" "$DISCORD_WEBHOOK"; }'
+    # - name: DISCORD_MESSAGE
+    #   value: "Starting Valheim Server"
+    # - name: PRE_BOOTSTRAP_HOOK
+    #   value: 'curl -sfSL -X POST -H "Content-Type: application/json" -d "{\"username\":\"Valheim\",\"content\":\"$$(eval echo $$DISCORD_MESSAGE)\"}" "$$DISCORD_WEBHOOK"'
+    # - name: STATUS_HTTP
+    #   value: "true"
+    # - name: "BACKUPS_DIRECTORY"
+    #   value: "/backups"
   persistence:
     backups:
       enabled: true
       type: nfs
       server: 192.168.30.4
       path: /mnt/HDD/Backups/valheim
-      mountPath: /backups
+      mountPath: /home/steam/backups
     config:
       enabled: true
       existingClaim: valheim-config
-      mountPath: /config
+      mountPath: /home/steam/.config/unity3d/IronGate/Valheim
     server:
       enabled: true
       existingClaim: valheim-server
-      mountPath: /opt/valheim
+      mountPath: /home/steam/valheim
   service:
     main:
       type: LoadBalancer
