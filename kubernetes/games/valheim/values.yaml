@@ -81,8 +81,8 @@ app-template:
       annotations:
         hajimari.io/enable: "true"
         hajimari.io/icon: bell-outline
-  nodeSelector:
-    intel.feature.node.kubernetes.io/gpu: "true"
+  # nodeSelector:
+  #   intel.feature.node.kubernetes.io/gpu: "true"
   # resources:
   #   limits:
   #     gpu.intel.com/i915: 1
