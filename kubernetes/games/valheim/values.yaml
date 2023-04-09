@@ -58,18 +58,18 @@ app-template:
   service:
     main:
       # type: LoadBalancer
-      # externalTrafficPolicy: Cluster
-      # loadBalancerIP:
+      # externalTrafficPolicy: Local
+      # loadBalancerIP: 192.168.40.4
       ports:
         http:
           enabled: false
         valheim-1:
-          enabled: true
+          enabled: false
           port: 2456
           protocol: UDP
           targetPort: 2456
         valheim-2:
-          enabled: false
+          enabled: true
           port: 2457
           protocol: UDP
           targetPort: 2457
