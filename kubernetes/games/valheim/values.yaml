@@ -27,7 +27,7 @@ app-template:
     - name: TZ
       value: "Europe/Berlin"
     - name: SERVER_PORT
-      value: "2456"
+      value: 2456
     - name: VALHEIM_LOG_FILTER_CONTAINS_Spawned
       value: "Got character ZDOID from"
     - name: ON_VALHEIM_LOG_FILTER_CONTAINS_Spawned
