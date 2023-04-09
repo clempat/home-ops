@@ -43,7 +43,7 @@ app-template:
   persistence:
     config:
       enabled: true
-      mountPath: /config
+      mountPath: /var/www/FreshRSS/data
       existingClaim: freshrss-config
       retain: true
   resources:
