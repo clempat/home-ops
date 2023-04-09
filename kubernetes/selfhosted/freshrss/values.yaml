@@ -45,7 +45,7 @@ app-template:
       enabled: true
       mountPath: /config
       existingClaim: freshrss-config
-      skipuninstall: true
+      retain: true
   resources:
     limits:
       memory: 513Mi
