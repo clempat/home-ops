@@ -89,6 +89,8 @@ app-template:
     intel.feature.node.kubernetes.io/gpu: "true"
   resources:
     limits:
+      gpu.intel.com/i915: 1
       memory: "7Gi"
     requests:
+      gpu.intel.com/i915: 1
       memory: "5Gi"
