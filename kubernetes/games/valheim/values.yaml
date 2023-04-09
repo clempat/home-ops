@@ -32,6 +32,10 @@ app-template:
       value: 1
     - name: AUTO_UPDATE_PAUSE_WITH_PLAYERS
       value: 1
+    - name: PUID
+      value: 1003
+    - name: PGID
+      value: 1003
     # - name: VALHEIM_LOG_FILTER_CONTAINS_Spawned
     #   value: "Got character ZDOID from"
     # - name: ON_VALHEIM_LOG_FILTER_CONTAINS_Spawned
