@@ -68,7 +68,7 @@ app-template:
 
   persistence:
     backups:
-      enable: true
+      enabled: true
       type: nfs
       server: 192.168.30.4
       path: /mnt/HDD/Backups/home-assistant
