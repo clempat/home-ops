@@ -27,7 +27,7 @@ app-template:
     - name: TZ
       value: "Europe/Berlin"
     - name: SERVER_PORT
-      value: 2457
+      value: 2456
     - name: VALHEIM_LOG_FILTER_CONTAINS_Spawned
       value: "Got character ZDOID from"
     - name: ON_VALHEIM_LOG_FILTER_CONTAINS_Spawned
@@ -64,12 +64,12 @@ app-template:
         http:
           enabled: false
         valheim-1:
-          enabled: false
+          enabled: true
           port: 2456
           protocol: UDP
           targetPort: 2456
         valheim-2:
-          enabled: true
+          enabled: false
           port: 2457
           protocol: UDP
           targetPort: 2457
