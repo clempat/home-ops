@@ -72,7 +72,7 @@ app-template:
         http:
           enabled: false
         valheim-1:
-          enabled: true
+          enabled: false
           port: 2456
           protocol: UDP
           targetPort: 2456
