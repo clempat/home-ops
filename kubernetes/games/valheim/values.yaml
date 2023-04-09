@@ -36,25 +36,13 @@ app-template:
     #   value: true
     # - name: AUTO_UPDATE_PAUSE_WITH_PLAYERS
     #   value: true
-    # - name: VALHEIM_LOG_FILTER_CONTAINS_Spawned
-    #   value: "Got character ZDOID from"
-    # - name: ON_VALHEIM_LOG_FILTER_CONTAINS_Spawned
-    #   value: '{ read l; l=$${l//*ZDOID from /}; l=$${l// :*/}; msg="Player $l connected."; curl -sfSL -X POST -H "Content-Type: application/json" -d "{\"username\":\"Valheim\",\"content\":\"$msg\"}" "$DISCORD_WEBHOOK"; }'
-    # - name: DISCORD_MESSAGE
-    #   value: "Starting Valheim Server"
-    # - name: PRE_BOOTSTRAP_HOOK
-    #   value: 'curl -sfSL -X POST -H "Content-Type: application/json" -d "{\"username\":\"Valheim\",\"content\":\"$$(eval echo $$DISCORD_MESSAGE)\"}" "$$DISCORD_WEBHOOK"'
-    # - name: STATUS_HTTP
-    #   value: "true"
-    # - name: "BACKUPS_DIRECTORY"
-    #   value: "/backups"
   persistence:
-    backups:
-      enabled: true
-      type: nfs
-      server: 192.168.30.4
-      path: /mnt/HDD/Backups/valheim
-      mountPath: /home/steam/backups
+    # backups:
+    #   enabled: true
+    #   type: nfs
+    #   server: 192.168.30.4
+    #   path: /mnt/HDD/Backups/valheim
+    #   mountPath: /home/steam/backups
     config:
       enabled: true
       existingClaim: valheim-config
