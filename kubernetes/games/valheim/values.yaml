@@ -24,14 +24,18 @@ app-template:
         secretKeyRef:
           name: valheim-secret
           key: DISCORD_WEBHOOK
+    - name: BACKUPS
+      value: true
+    - name: SERVER_PUBLIC
+      value: false
     - name: TZ
       value: "Europe/Berlin"
     - name: SERVER_PORT
       value: 2456
     - name: AUTO_UPDATE
-      value: 1
+      value: true
     - name: AUTO_UPDATE_PAUSE_WITH_PLAYERS
-      value: 1
+      value: true
     - name: PUID
       value: 1003
     - name: PGID
