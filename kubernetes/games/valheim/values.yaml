@@ -38,6 +38,7 @@ app-template:
     #   value: true
   probes:
     liveness:
+      enabled: false
       spec:
         initialDelaySeconds: 10
         periodSeconds: 10
