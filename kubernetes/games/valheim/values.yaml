@@ -43,6 +43,11 @@ app-template:
       enabled: false
     startup::
       enabled: false
+      spec:
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        timeoutSeconds: 5
+        failureThreshold: 5
   persistence:
     # backups:
     #   enabled: true
