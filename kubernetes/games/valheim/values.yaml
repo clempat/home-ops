@@ -30,7 +30,7 @@ app-template:
       value: false
     - name: TZ
       value: "Europe/Berlin"
-    - name: SERVER_PORT
+    - name: PORT
       value: 2456
     # - name: AUTO_UPDATE
     #   value: true
