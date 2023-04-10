@@ -26,7 +26,7 @@ app-template:
           key: DISCORD_WEBHOOK
     # - name: BACKUPS
     #   value: true
-    - name: SERVER_PUBLIC
+    - name: PUBLIC
       value: false
     - name: TZ
       value: "Europe/Berlin"
