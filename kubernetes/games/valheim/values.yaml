@@ -19,11 +19,11 @@ app-template:
         secretKeyRef:
           name: valheim-secret
           key: SERVER_PASS
-    - name: WEBHOOK_URL
-      valueFrom:
-        secretKeyRef:
-          name: valheim-secret
-          key: DISCORD_WEBHOOK
+    # - name: WEBHOOK_URL
+    #  valueFrom:
+    #    secretKeyRef:
+    #      name: valheim-secret
+    #      key: DISCORD_WEBHOOK
     # - name: BACKUPS
     #   value: true
     - name: PUBLIC
