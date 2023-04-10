@@ -36,6 +36,10 @@ app-template:
       value: true
     - name: AUTO_UPDATE_PAUSE_WITH_PLAYERS
       value: true
+    - name: PGID
+      value: 1003
+    - name: PUID
+      value: 1003
   persistence:
     backups:
       enabled: true
