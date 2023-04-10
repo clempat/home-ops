@@ -4,13 +4,16 @@ app-template:
     repository: mbround18/valheim
     tag: latest
   restartPolicy: Never
-  # probes:
-  #   liveness:
-  #     enabled: false
-  #   readiness:
-  #     enabled: false
-  #   startup:
-  #     enabled: false
+  probes:
+    liveness:
+      enabled: true
+      type: UDP
+    readiness:
+      enabled: true
+      type: UDP
+    startup:
+      enabled: true
+      type: UDP
   env:
     - name: NAME
       valueFrom:
