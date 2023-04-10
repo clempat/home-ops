@@ -4,13 +4,13 @@ app-template:
     repository: mbround18/valheim
     tag: latest
   restartPolicy: Never
-  probes:
-    liveness:
-      enabled: false
-    readiness:
-      enabled: false
-    startup:
-      enabled: false
+  # probes:
+  #   liveness:
+  #     enabled: false
+  #   readiness:
+  #     enabled: false
+  #   startup:
+  #     enabled: false
   env:
     - name: NAME
       valueFrom:
