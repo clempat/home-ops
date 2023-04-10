@@ -76,10 +76,8 @@ app-template:
       ports:
         http:
           port: 80
-          primary: false
         valheim-1:
           enabled: true
-          primary: true
           port: 2456
           protocol: UDP
           targetPort: 2456
