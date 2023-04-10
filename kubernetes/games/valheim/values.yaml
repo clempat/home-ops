@@ -36,6 +36,13 @@ app-template:
     #   value: true
     # - name: AUTO_UPDATE_PAUSE_WITH_PLAYERS
     #   value: true
+  probes:
+    liveness:
+      spec:
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        timeoutSeconds: 1
+        failureThreshold: 5
   persistence:
     # backups:
     #   enabled: true
