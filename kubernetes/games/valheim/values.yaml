@@ -51,6 +51,8 @@ app-template:
       value: 1003
     - name: PUID
       value: 1003
+    - name: HTTP_PORT
+      value: 80
   persistence:
     backups:
       enabled: true
@@ -73,7 +75,7 @@ app-template:
       loadBalancerIP: 192.168.40.4
       ports:
         http:
-          enabled: false
+          port: 80
         valheim-1:
           enabled: true
           port: 2456
