@@ -53,6 +53,11 @@ app-template:
       value: 1003
     - name: HTTP_PORT
       value: 80
+    - name: TYPE
+      value: BepInEx
+    - name: MODS
+      value: |
+        https://github.com/Astropilot/ValheimTooler/releases/download/v1.8.0/ValheimTooler-1.8.0_BepInExMod.zip
   persistence:
     backups:
       enabled: true
