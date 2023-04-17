@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rtsptoweb-config
+data:
+  config.json: |
+    {
+      "server": {
+        "debug": true,
+        "log_level": "info",
+        "http_demo": true,
+        "http_debug": false,
+        "http_port": ":8083",
+        "ice_servers": ["stun:stun.l.google.com:19302", "stun:stun.t-online.de:3478"],
+        "rtsp_port": ":5541"
+      },
+      "streams": {},
+    }
