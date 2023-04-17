@@ -144,3 +144,5 @@ apps:
     path: kubernetes/storage
   - name: valheim
     path: kubernetes/games
+  - name: rtsptoweb
+    path: kubernetes/home

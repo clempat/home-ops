@@ -1,0 +1,46 @@
+---
+app-template:
+  controller:
+    type: statefulset
+    replicas: 1
+    annotations:
+      reloader.stakater.com/auto: "true"
+  image:
+    repository: ghcr.io/deepch/rtsptoweb
+    tag: latest
+    pullPolicy: IfNotPresent
+  strategy:
+    type: Recreate
+  env:
+    TZ: "Europe/Berlin"
+  hostNetwork: true
+  dnsPolicy: ClusterFirstWithHostNet
+
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: networking-authelia@kubernetescrd
+        hajimari.io/enable: "true"
+        hajimari.io/icon: cctv
+        hajimari.io/appName: RTSP to Web
+        hajimari.io/info: Application transforming RTSP to WebRTC
+
+  service:
+    main:
+      ports:
+        http:
+          port: 8083
+        rtsp:
+          enabled: true
+          port: 5541
+          protocol: TCP
+          targetPort: 5541
+
+  
+  persistence:
+    config:
+      enabled: true
+      existingClaim: rtsptoweb
