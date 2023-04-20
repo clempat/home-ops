@@ -12,7 +12,7 @@ app-template:
       reloader.stakater.com/auto: "true"
   image:
     repository: ghcr.io/n8n-io/n8n
-    tag: 0.223.0
+    tag: 0.225.1
   env:
     GENERIC_TIMEZONE: Europe/Berlin
     TZ: Europe/Berlin
