@@ -22,7 +22,7 @@ app-template:
       ingressClassName: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.middlewares: networking-authelia@kubernetescrd
+        # traefik.ingress.kubernetes.io/router.middlewares: networking-authelia@kubernetescrd
         hajimari.io/enable: "true"
         hajimari.io/icon: cctv
         hajimari.io/appName: RTSP to Web
