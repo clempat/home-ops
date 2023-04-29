@@ -47,6 +47,17 @@ resource "unifi_firewall_rule" "accept_shield_to_mediacenter" {
   dst_address = "192.168.30.4"
 }
 
+resource "unifi_firewall_rule" "accept_shield_to_jellyfin" {
+  name    = "Accept Shield to Jellyfin"
+  action  = "accept"
+  ruleset = "LAN_IN"
+
+  rule_index = 2015
+
+  src_address = "192.168.20.6"
+  dst_address = "192.168.40.6"
+}
+
 resource "unifi_firewall_rule" "drop_iot_to_local" {
   name    = "Drop IoT to local"
   action  = "drop"
