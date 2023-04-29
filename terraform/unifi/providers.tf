@@ -5,3 +5,7 @@ provider "unifi" {
   # certificates for your controller
   allow_insecure = true
 }
+
+provider "onepassword" {
+  url = "http://localhost:8080"
+}

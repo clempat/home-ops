@@ -4,5 +4,10 @@ terraform {
       source  = "paultyng/unifi"
       version = "0.41.0"
     }
+    onepassword = {
+      source  = "1Password/onepassword"
+      version = "1.1.4"
+    }
   }
 }
+
