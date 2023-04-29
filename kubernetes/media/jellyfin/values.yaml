@@ -9,6 +9,9 @@ app-template:
     TZ: Europe/Berlin
   service:
     main:
+      type: LoadBalancer
+      externalTrafficPolicy: Cluster
+      loadBalancerIP: 192.168.40.6
       ports:
         http:
           port: &port 8096
