@@ -24,12 +24,24 @@ resource "unifi_firewall_rule" "accept_home_assistant" {
   dst_address = "192.168.40.5"
 }
 
+resource "unifi_firewall_rule" "accept_traefik" {
+  name    = "Accept Traefik"
+  action  = "accept"
+  ruleset = "LAN_IN"
+
+  rule_index = 2013
+
+  protocol = "tcp"
+
+  dst_address = "192.168.40.2"
+}
+
 resource "unifi_firewall_rule" "accept_dns" {
   name    = "Accept DNS"
   action  = "accept"
   ruleset = "LAN_IN"
 
-  rule_index = 2013
+  rule_index = 2014
 
   protocol = "udp"
 
@@ -41,7 +53,7 @@ resource "unifi_firewall_rule" "accept_shield_to_mediacenter" {
   action  = "accept"
   ruleset = "LAN_IN"
 
-  rule_index = 2014
+  rule_index = 2015
 
   src_address = "192.168.20.6"
   dst_address = "192.168.30.4"
@@ -52,7 +64,7 @@ resource "unifi_firewall_rule" "accept_shield_to_jellyfin" {
   action  = "accept"
   ruleset = "LAN_IN"
 
-  rule_index = 2015
+  rule_index = 2016
 
   src_address = "192.168.20.6"
   dst_address = "192.168.40.6"
@@ -81,4 +93,14 @@ resource "unifi_firewall_rule" "drop_iot_to_lan" {
 
   src_network_id = resource.unifi_network.iot.id
   dst_address    = "192.168.0.0/16"
+}
+
+resource "unifi_firewall_rule" "drop_tv_wan" {
+  name       = "Drop TV WAN"
+  action     = "drop"
+  rule_index = 2022
+
+  ruleset = "WAN_OUT"
+
+  src_address = "192.168.40.10"
 }
