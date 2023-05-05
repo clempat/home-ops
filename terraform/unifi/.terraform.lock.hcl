@@ -5,6 +5,7 @@ provider "registry.terraform.io/1password/onepassword" {
   version     = "1.1.4"
   constraints = "1.1.4"
   hashes = [
+    "h1:+cONzCC4jHPsPHku0Ced0PTngpTIfbYyNe7YHaqi4Gw=",
     "h1:3TVsJ9fbNOerTE00uFqqKQDW6WRAPP0kZVhVhfd0COw=",
     "zh:018f3e223ae82ba675f0f088af135a9196326501f9f57f397067a65342cdcca3",
     "zh:1a077bba8db0ffa0c969bbcd8525d30f4d8018257363408b4e6891b319397e91",
