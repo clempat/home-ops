@@ -150,3 +150,5 @@ apps:
     path: kubernetes/selfhosted
   - name: frigate
     path: kubernetes/home
+  - name: uptime-kuma
+    path: kubernetes/selfhosted
