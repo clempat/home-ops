@@ -114,7 +114,7 @@ apps:
     path: kubernetes/home
   - name: local-storage
     path: kubernetes/storage
-  - name: cloudflare-ddns
+  - name: ddns-updater
     path: kubernetes/networking
   - name: tatort-bot
     path: kubernetes/selfhosted

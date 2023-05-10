@@ -18,12 +18,12 @@ spec:
             "settings": [
               {
                 "provider": "cloudflare",
-                "zone_identifier": "{{ `{{ cloudflare_ZONE_ID }}` }}",
-                "domain": "{{ `{{ cloudflare_DOMAIN }}` }}",
+                "zone_identifier": "{{ `{{ .cloudflare_ZONE_ID }}` }}",
+                "domain": "{{ `{{ .cloudflare_DOMAIN }}` }}",
                 "host": "ipv4",
                 "ttl": 600,
-                "key": "{{ `{{ cloudflare_GLOBAL_API_KEY }}` }}",
-                "email": "{{ `{{ cloudflare_username }}` }}", 
+                "key": "{{ `{{ .cloudflare_GLOBAL_API_KEY }}` }}",
+                "email": "{{ `{{ .cloudflare_username }}` }}", 
                 "ip_version": "ipv4",
                 "proxied": true
               }

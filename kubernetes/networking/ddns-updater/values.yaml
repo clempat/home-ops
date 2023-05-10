@@ -1,5 +1,8 @@
 ---
 app-template:
+  controller:
+    annotations:
+      reloader.stakater.com/auto: "true"
   image:
     repository: qmcgaw/ddns-updater
     tag: latest
@@ -14,7 +17,7 @@ app-template:
   persistence:
     config:
       enabled: true
-      type: configMap
+      type: secret
       name: ddns-updater-config
       subPath: config.json
       mountPath: /data/config.json
