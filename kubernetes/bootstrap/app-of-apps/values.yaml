@@ -146,3 +146,5 @@ apps:
     path: kubernetes/games
   - name: rtsptoweb
     path: kubernetes/home
+  - name: rss-bridge
+    path: kubernetes/selfhosted
