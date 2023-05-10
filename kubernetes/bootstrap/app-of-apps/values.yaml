@@ -148,3 +148,5 @@ apps:
     path: kubernetes/home
   - name: rss-bridge
     path: kubernetes/selfhosted
+  - name: frigate
+    path: kubernetes/home
