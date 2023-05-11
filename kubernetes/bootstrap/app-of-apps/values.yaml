@@ -87,8 +87,8 @@ apps:
       - group: apps
         kind: StatefulSet
         jsonPointers:
-          - /template/volumeClaimTemplates/apiVersion
-          - /template/volumeClaimTemplates/kind
+          - /spec/template/volumeClaimTemplates/apiVersion
+          - /spec/template/volumeClaimTemplates/kind
   - name: node-feature-discovery
     path: kubernetes/system
     namespace: system
@@ -98,16 +98,16 @@ apps:
       - group: apps
         kind: StatefulSet
         jsonPointers:
-          - /template/volumeClaimTemplates/apiVersion
-          - /template/volumeClaimTemplates/kind
+          - /spec/template/volumeClaimTemplates/apiVersion
+          - /spec/template/volumeClaimTemplates/kind
   - name: zwave-js-ui
     path: kubernetes/home
     ignoreDifferences:
       - group: apps
         kind: StatefulSet
         jsonPointers:
-          - /template/volumeClaimTemplates/apiVersion
-          - /template/volumeClaimTemplates/kind
+          - /spec/template/volumeClaimTemplates/apiVersion
+          - /spec/template/volumeClaimTemplates/kind
   - name: external-services
     path: kubernetes/networking
   - name: esphome
