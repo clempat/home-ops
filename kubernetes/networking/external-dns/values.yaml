@@ -23,6 +23,11 @@ external-dns:
     - ingress
   txtPrefix: "k8s."
   txtOwnerId: "default"
+  service:
+    main:
+      ports:
+        http:
+          port: 8000
   resources:
     requests:
       memory: 100Mi
