@@ -45,9 +45,7 @@ app-template:
   securityContext:
     privileged: true
   volumeClaimTemplates:
-    - apiVersion: v1
-      kind: PersistentVolumeClaim
-      name: config
+    - name: config
       mountPath: /data
       accessMode: ReadWriteOnce
       size: 5Gi
