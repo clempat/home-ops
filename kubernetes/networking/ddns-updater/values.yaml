@@ -27,6 +27,8 @@ app-template:
           port: 8000
   securityContext:
     runAsUser: 1000
+  podSecuritzContext:
+    fsGroup: 1000
   volumeClaimTemplates:
     - name: data
       mountPath: /data
