@@ -9,6 +9,9 @@ app-template:
     tag: latest
   env:
     PUBLICIP_HTTP_PROVIDERS: ifconfig
+    DATADIR: /data
+    TZ: Europe/Berlin
+    BACKUP_DIRECTORY: /backups
 
   ingress:
     main:
@@ -26,7 +29,7 @@ app-template:
     runAsUser: 1000
   volumeClaimTemplates:
     - name: data
-      mountPath: /updater/data
+      mountPath: /data
       accessMode: ReadWriteOnce
       size: 1Gi
       storageClass: longhorn
@@ -36,6 +39,6 @@ app-template:
       type: secret
       name: ddns-updater-config
       subPath: config.json
-      mountPath: /updater/data/config.json
-      defaultMode: 421
+      mountPath: /data/config.json
+      defaultMode: 0755
       readOnly: true
