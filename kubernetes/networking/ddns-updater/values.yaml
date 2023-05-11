@@ -1,6 +1,7 @@
 ---
 app-template:
   controller:
+    type: statefulset
     annotations:
       reloader.stakater.com/auto: "true"
   image:
@@ -21,12 +22,14 @@ app-template:
       ports:
         http:
           port: 8000
+  securityContext:
+    runAsUser: 1000
   persistence:
     config:
       enabled: true
       type: secret
       name: ddns-updater-config
       subPath: config.json
-      mountPath: /data/config.json
-      defaultMode: 0775
+      mountPath: /updater/data/config.json
+      defaultMode: 421
       readOnly: true
