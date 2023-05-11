@@ -1,5 +1,9 @@
 ---
 app-template:
+  controller:
+    type: statefulset
+    annotations:
+      reloader.stakater.com/auto: "true"
   global:
     nameOverride: uptime-kuma
   image:
