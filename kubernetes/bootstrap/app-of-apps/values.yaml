@@ -84,7 +84,7 @@ apps:
   - name: home-assistant
     path: kubernetes/home
     ignoreDifferences:
-      - group: apps/v1
+      - group: apps
         kind: StatefulSet
         jsonPointers:
           - /metadata/volumeClaimTemplates/apiVersion
@@ -95,7 +95,7 @@ apps:
   - name: zigbee2mqtt
     path: kubernetes/home
     ignoreDifferences:
-      - group: apps/v1
+      - group: apps
         kind: StatefulSet
         jsonPointers:
           - /metadata/volumeClaimTemplates/apiVersion
@@ -103,7 +103,7 @@ apps:
   - name: zwave-js-ui
     path: kubernetes/home
     ignoreDifferences:
-      - group: apps/v1
+      - group: apps
         kind: StatefulSet
         jsonPointers:
           - /metadata/volumeClaimTemplates/apiVersion
