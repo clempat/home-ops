@@ -27,9 +27,9 @@ app-template:
       ports:
         http:
           port: 8000
-  securityContext:
-    runAsUser: 1000
   podSecuritzContext:
+    runAsUser: 1000
+    runAsGroup: 1000
     fsGroup: 1000
   volumeClaimTemplates:
     - name: data
@@ -44,5 +44,5 @@ app-template:
       name: ddns-updater-config
       subPath: config.json
       mountPath: /data/config.json
-      defaultMode: 0755
+      defaultMode: 420
       readOnly: true
