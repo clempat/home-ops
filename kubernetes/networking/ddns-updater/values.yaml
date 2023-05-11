@@ -7,6 +7,7 @@ app-template:
   image:
     repository: qmcgaw/ddns-updater
     tag: latest
+  command: ['sleep', 'infinity']
   env:
     PUBLICIP_HTTP_PROVIDERS: ifconfig
     DATADIR: /data
@@ -22,6 +23,7 @@ app-template:
         traefik.ingress.kubernetes.io/router.middlewares: networking-authelia@kubernetescrd
   service:
     main:
+      enabled: false
       ports:
         http:
           port: 8000
