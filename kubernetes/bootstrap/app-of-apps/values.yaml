@@ -87,8 +87,8 @@ apps:
       - group: apps
         kind: StatefulSet
         jsonPointers:
-          - /spec/template
-          - /spec/template
+          - /spec/template/volumeClaimTemplates/apiVersion
+          - /spec/template/volumeClaimTemplates/kind
   - name: node-feature-discovery
     path: kubernetes/system
     namespace: system
