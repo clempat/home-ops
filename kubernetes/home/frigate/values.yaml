@@ -53,8 +53,8 @@ app-template:
   persistence:
     config-file:
       enabled: true
-      type: configMap
-      name: frigate-configmap
+      type: secret
+      name: frigate-secret
       subPath: config.yaml
       mountPath: /config/config.yml
       readOnly: true
