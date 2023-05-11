@@ -152,5 +152,5 @@ apps:
     path: kubernetes/home
   - name: uptime-kuma
     path: kubernetes/selfhosted
-  - name: syncthing
-    path: kubernetes/selfhosted
+  # - name: syncthing
+  #   path: kubernetes/selfhosted
