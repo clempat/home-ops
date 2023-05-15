@@ -11,7 +11,7 @@ app-template:
     main:
       ports:
         http:
-          port: 10443
+          port: 11080
   ingress:
     main:
       enabled: true
