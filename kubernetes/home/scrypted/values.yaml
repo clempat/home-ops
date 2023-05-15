@@ -9,9 +9,24 @@ app-template:
     TZ: Europe/Berlin
   service:
     main:
+      type: LoadBalancer
+      loadBalancerIP: "192.168.40.9"
+      externalTrafficPolicy: Local
       ports:
         http:
           port: 11080
+        tcp:
+          port: 44333
+        mdns-tcp:
+          enabled: true
+          port: 5353
+          protocol: TCP
+          targetPort: 5353
+        mdns-udp:
+          enabled: true
+          port: 5353
+          protocol: UDP
+          targetPort: 5353
   ingress:
     main:
       enabled: true
