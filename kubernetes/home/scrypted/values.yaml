@@ -1,0 +1,43 @@
+---
+app-template:
+  controller:
+    type: statefulset
+  image:
+    repository: ghcr.io/koush/scrypted
+    tag: 18-bullseye-full-v0.12.1
+  env:
+    TZ: Europe/Berlin
+  service:
+    main:
+      ports:
+        http:
+          port: 11080
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+  podSecurityContext:
+    runAsUser: 568
+    runAsGroup: 568
+    fsGroup: 568
+    fsGroupChangePolicy: OnRootMismatch
+    supplementalGroups: [44, 109, 10000]
+  persistence:
+    cache:
+      enabled: true
+      mountPath: /.npm
+      type: emptyDir
+  volumeClaimTemplates:
+    - name: config
+      mountPath: /server/volume
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      storageClass: longhorn
+  nodeSelector:
+    intel.feature.node.kubernetes.io/gpu: "true"
+  resources:
+    requests:
+      cpu: 10m
+      memory: 250Mi
+    limits:
+      memory: 2000Mi

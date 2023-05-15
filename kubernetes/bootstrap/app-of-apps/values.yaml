@@ -154,3 +154,5 @@ apps:
     path: kubernetes/selfhosted
   # - name: syncthing
   #   path: kubernetes/selfhosted
+  - name: scrypted
+    path: kubernetes/home
