@@ -7,6 +7,7 @@ app-template:
     tag: 18-bullseye-full-v0.12.1
   env:
     TZ: Europe/Berlin
+  hostNetwork: true
   service:
     main:
       type: LoadBalancer
@@ -50,8 +51,6 @@ app-template:
       accessMode: ReadWriteOnce
       size: 1Gi
       storageClass: longhorn
-  nodeSelector:
-    intel.feature.node.kubernetes.io/gpu: "true"
   resources:
     requests:
       cpu: 10m
