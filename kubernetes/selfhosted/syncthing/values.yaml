@@ -5,6 +5,13 @@ app-template:
   image:
     repository: syncthing/syncthing
     tag: 1.23.4
+
+  podSecurityContext:
+    runAsUser: 1003
+    runAsGroup: 1003
+    fsGroup: 1003
+    fsGroupChangePolicy: "OnRootMismatch"
+
   service:
     main:
       ports:
@@ -38,6 +45,10 @@ app-template:
       server: 192.168.30.4
       path: /mnt/HDD/Syncthing
       mountPath: /var/syncthing
+
+  env:
+    PUID: "1003"
+    PGID: "1003"
 
   resources:
     requests:
