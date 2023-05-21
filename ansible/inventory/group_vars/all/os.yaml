@@ -3,6 +3,7 @@ timezone: Europe/Berlin
 public_ssh_keys:
   - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFV7+yMdRps8qQex9xlYcntTFEJa6q6H7vDhAXYLWjHa clement@tuxedo"
   - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBvKAiHEGGOxW+Y/quPifHli4LGfvcJJYTyp1r8kJ2/j clement@iphone"
+  - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPwMKbHTiffsltsF+SN44pDjK3YbyuL6Nst5aY/k3NFU clement@1password"
 packages:
   - apt-transport-https
   - arptables
