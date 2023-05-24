@@ -52,6 +52,12 @@ apps:
   - name: emqx
     path: kubernetes/home
     namespace: home
+    ignoreDifferences:
+      - group: apps
+        kind: StatefulSet
+        jsonPointers:
+          - /spec/template/volumeClaimTemplates/apiVersion
+          - /spec/template/volumeClaimTemplates/kind
   - name: freshrss
     path: kubernetes/selfhosted
   - name: snapshot-controller
