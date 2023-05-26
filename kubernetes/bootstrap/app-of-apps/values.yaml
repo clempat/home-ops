@@ -122,8 +122,8 @@ apps:
     path: kubernetes/storage
   - name: ddns-updater
     path: kubernetes/networking
-  - name: tatort-bot
-    path: kubernetes/selfhosted
+  # - name: tatort-bot
+  #   path: kubernetes/selfhosted
   - name: n8n
     path: kubernetes/selfhosted
   - name: recipes
