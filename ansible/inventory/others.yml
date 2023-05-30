@@ -1,14 +1,12 @@
 ---
 kubernetes:
   children:
-    rpi:
+    master:
       hosts:
+        fuji-node-1:
+          ansible_host: "192.168.40.41"
         rpi-node-1:
           ansible_host: "192.168.40.31"
       vars:
         ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
         ansible_user: "ubuntu"
-    agent:
-      hosts:
-        fuji-node-1:
-          ansible_host: "192.168.40.41"

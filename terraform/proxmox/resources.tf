@@ -1,6 +1,6 @@
 resource "proxmox_vm_qemu" "k8s_server" {
   count       = 1
-  name        = "${var.target_node}-master-${count.index + 1}"
+  name        = "${var.target_node}-master-1${count.index + 1}"
   target_node = var.target_node
 
   clone = var.cloudinit_template
@@ -17,7 +17,7 @@ resource "proxmox_vm_qemu" "k8s_server" {
   disk {
     size     = "100G"
     type     = "scsi"
-    storage  = "local-ssd-2"
+    storage  = "local-lvm"
     iothread = 1
     backup   = false
   }
@@ -34,7 +34,7 @@ resource "proxmox_vm_qemu" "k8s_server" {
   }
 
   # Cloud Init Settings
-  ipconfig0 = "ip=192.168.40.1${count.index + 1}/24,gw=192.168.40.1"
+  ipconfig0 = "ip=192.168.40.11${count.index + 1}/24,gw=192.168.40.1"
 
   sshkeys = <<EOF
   ${var.ssh_key}
@@ -42,8 +42,8 @@ resource "proxmox_vm_qemu" "k8s_server" {
 }
 
 resource "proxmox_vm_qemu" "k8s_agent" {
-  count       = 2
-  name        = "${var.target_node}-node-${count.index + 1}"
+  count       = 1
+  name        = "${var.target_node}-node-1${count.index + 1}"
   target_node = var.target_node
 
   clone = var.cloudinit_template
@@ -59,7 +59,7 @@ resource "proxmox_vm_qemu" "k8s_agent" {
   disk {
     size     = "100G"
     type     = "scsi"
-    storage  = "local-ssd-2"
+    storage  = "local-lvm"
     iothread = 1
     backup   = false
   }
@@ -76,7 +76,7 @@ resource "proxmox_vm_qemu" "k8s_agent" {
   }
 
   # Cloud Init Settings
-  ipconfig0 = "ip=192.168.40.2${count.index + 1}/24,gw=192.168.40.1"
+  ipconfig0 = "ip=192.168.40.12${count.index + 1}/24,gw=192.168.40.1"
 
   sshkeys = <<EOF
   ${var.ssh_key}
