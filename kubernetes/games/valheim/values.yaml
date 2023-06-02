@@ -103,13 +103,17 @@ app-template:
       annotations:
         hajimari.io/enable: "true"
         hajimari.io/icon: bell-outline
+
+  serviceAccount:
+    name: "tailscale"
+
   sidecars:
     ts-sidecar:
       image: "ghcr.io/tailscale/tailscale:v1.42.0"
       env:
         # Store the state in a k8s secret
       - name: TS_KUBE_SECRET
-        value: "tailscale-auth-valheim"
+        value: "tailscale-auth"
       - name: TS_USERSPACE
         value: "false"
       - name: TS_AUTHKEY

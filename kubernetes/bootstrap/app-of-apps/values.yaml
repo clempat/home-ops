@@ -163,3 +163,5 @@ apps:
     path: kubernetes/selfhosted
   - name: scrypted
     path: kubernetes/home
+  - name: tailscale
+    path: kubernetes/networking
