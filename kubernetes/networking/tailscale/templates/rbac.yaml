@@ -19,6 +19,12 @@ metadata:
   name: "tailscale"
   namespace: "valheim"
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: "tailscale"
+  namespace: "home-assistant"
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -27,6 +33,9 @@ subjects:
 - kind: ServiceAccount
   name: "tailscale"
   namespace: "valheim"
+- kind: ServiceAccount
+  name: "tailscale"
+  namespace: "home-assistant"
 roleRef:
   kind: ClusterRole
   name: tailscale

@@ -89,6 +89,7 @@ apps:
     namespace: networking
   - name: home-assistant
     path: kubernetes/home
+    tailscaleNetwork: "true"
     ignoreDifferences:
       - group: apps
         kind: StatefulSet
