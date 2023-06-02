@@ -8,13 +8,7 @@ longhorn:
     backupTarget: nfs://192.168.30.4:/mnt/HDD/Backups/Longhorn
   longhornManager:
     tolerations:
-      - effect: "NoExecute"
-        operator: "Exists"
-      - effect: "NoSchedule"
-        operator: "Exists"
+      - operator: "Exists"
   longhornDriver:
     tolerations:
-      - effect: "NoExecute"
-        operator: "Exists"
-      - effect: "NoSchedule"
-        operator: "Exists"
+      - operator: "Exists"
