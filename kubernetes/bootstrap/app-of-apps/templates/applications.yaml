@@ -64,5 +64,12 @@ spec:
       - ApplyOutOfSyncOnly=true
       - ServerSideApply=true
       - RespectIgnoreDifferences=true
+    {{- if (default false $app.tailscaleNetwork) }}
+    managedNamespaceMetadata:
+      labels:
+        {{- if (default false $app.tailscaleNetwork) }}
+        tailscale: "true"
+        {{- end }}
+    {{- end }}
   {{- end }}
 {{- end }}

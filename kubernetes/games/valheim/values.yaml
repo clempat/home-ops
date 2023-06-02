@@ -103,6 +103,25 @@ app-template:
       annotations:
         hajimari.io/enable: "true"
         hajimari.io/icon: bell-outline
+  sidecars:
+    ts-sidecar:
+      image: "ghcr.io/tailscale/tailscale:v1.42.0"
+      env:
+        # Store the state in a k8s secret
+      - name: TS_KUBE_SECRET
+        value: "tailscale-auth-valheim"
+      - name: TS_USERSPACE
+        value: "false"
+      - name: TS_AUTHKEY
+        valueFrom:
+          secretKeyRef:
+            name: tailscale-auth
+            key: TS_AUTHKEY
+            optional: true
+      securityContext:
+        capabilities:
+          add:
+          - NET_ADMIN
   nodeSelector:
     intel.feature.node.kubernetes.io/gpu: "true"
   resources:

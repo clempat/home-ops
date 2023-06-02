@@ -150,6 +150,7 @@ apps:
     path: kubernetes/storage
   - name: valheim
     path: kubernetes/games
+    tailscaleNetwork: true
   # - name: rtsptoweb
   #   path: kubernetes/home
   - name: rss-bridge
