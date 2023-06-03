@@ -19,6 +19,8 @@ app-template:
     startup:
       enabled: true
       type: UDP
+      spec:
+        initialDelaySeconds: 18 000 #5min
   env:
     - name: NAME
       valueFrom:
