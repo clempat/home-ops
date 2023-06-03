@@ -20,7 +20,7 @@ app-template:
       enabled: true
       type: UDP
       spec:
-        initialDelaySeconds: 7200 #2min
+        initialDelaySeconds: 120 #2min
   env:
     - name: NAME
       valueFrom:
