@@ -1,5 +1,10 @@
 ---
 app-template:
+  controller:
+    replicas: 1
+    type: statefulset
+    annotations:
+      reloader.stakater.com/auto: "true"
   image:
     repository: mbround18/valheim
     tag: latest
