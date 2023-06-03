@@ -11,3 +11,6 @@ longhorn:
   longhornDriver:
     tolerations:
       - operator: "Exists"
+  longhornRecoveryBackend:
+    tolerations:
+      - operator: "Exists"
