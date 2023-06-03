@@ -42,10 +42,10 @@ app-template:
         secretKeyRef:
           name: valheim-secret
           key: DISCORD_WEBHOOK
-    - name: BACKUPS
-      value: true
-    - name: PUBLIC
-      value: false
+    - name: AUTO_BACKUP
+      value: 1
+    - name: AUTO_BACKUP_PAUSE_WITH_NO_PLAYERS
+      value: 1
     - name: TZ
       value: "Europe/Berlin"
     - name: PORT
