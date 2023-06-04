@@ -166,3 +166,5 @@ apps:
     path: kubernetes/home
   - name: tailscale
     path: kubernetes/networking
+  - name: baserow
+    path: kubernetes/selfhosted

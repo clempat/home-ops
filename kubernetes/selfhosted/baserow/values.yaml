@@ -1,0 +1,46 @@
+---
+app-template:
+  image:
+    repository: baserow/baserow
+    pullPolicy: IfNotPresent
+    tag: 1.17.2
+  strategy:
+    type: Recreate
+
+  initContainers:
+    init-db:
+      image: ghcr.io/onedr0p/postgres-initdb:14.8
+      imagePullPolicy: IfNotPresent
+      envFrom:
+        - secretRef:
+            name: baserow-secret
+
+  env:
+    TZ: Europe/Berlin
+
+  envFrom:
+    - secretRef:
+        name: baserow-secret
+
+  service:
+    main:
+      ports:
+        http:
+          port: 80
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        hajimari.io/enable: "true"
+        hajimari.io/icon: "table"
+        hajimari.io/group: "Airtable"
+  persistence:
+    data:
+      enabled: true
+      mountPath: /baserow/data
+      existingClaim: baserow-data
+      retain: true
+  resources:
+    limits:
+      memory: 513Mi
