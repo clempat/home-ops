@@ -7,7 +7,7 @@ app-template:
       reloader.stakater.com/auto: "true"
   image:
     repository: ghcr.io/koenkk/zigbee2mqtt
-    tag: 1.30.4
+    tag: 1.31.2
   tolerations:
     - key: "hardware"
       operator: "Equal"
