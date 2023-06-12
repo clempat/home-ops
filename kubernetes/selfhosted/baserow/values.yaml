@@ -14,6 +14,16 @@ app-template:
       envFrom:
         - secretRef:
             name: baserow-secret
+  probes:
+    liveness: &probes
+      enabled: true
+      custom: true
+      spec:
+        httpGet:
+          path: /_health
+          port: 80
+    readiness: *probes
+
   env:
     TZ: Europe/Berlin
 
