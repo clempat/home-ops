@@ -14,11 +14,6 @@ app-template:
       envFrom:
         - secretRef:
             name: baserow-secret
-  probes:
-    startup:
-      spec:
-        initialDelaySeconds: 120 #2min
-
   env:
     TZ: Europe/Berlin
 
@@ -30,7 +25,7 @@ app-template:
     main:
       ports:
         http:
-          port: 3000
+          port: 80
   ingress:
     main:
       enabled: true
@@ -45,6 +40,3 @@ app-template:
       mountPath: /baserow/data
       existingClaim: baserow-data
       retain: true
-  resources:
-    limits:
-      memory: 513Mi
