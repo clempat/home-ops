@@ -25,6 +25,7 @@ apps:
   - name: traefik
     path: kubernetes/networking
     namespace: networking
+    tailscaleNetwork: "true"
   - name: longhorn
     path: kubernetes/storage
     namespace: storage
