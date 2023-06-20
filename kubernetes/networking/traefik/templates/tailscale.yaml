@@ -5,6 +5,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: traefik
+  namespace: networking
 spec:
   serviceAccountName: "tailscale"
   initContainers:
