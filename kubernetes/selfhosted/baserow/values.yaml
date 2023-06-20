@@ -3,7 +3,7 @@ app-template:
   image:
     repository: baserow/baserow
     pullPolicy: IfNotPresent
-    tag: 1.17.2
+    tag: 1.18.0
   strategy:
     type: Recreate
 
