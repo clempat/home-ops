@@ -168,3 +168,5 @@ apps:
     path: kubernetes/networking
   - name: baserow
     path: kubernetes/selfhosted
+  - name: grafana
+    path: kubernetes/monitoring
