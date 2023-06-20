@@ -10,6 +10,8 @@ grafana:
     GF_PANELS_DISABLE_SANITIZE_HTML: true
     GF_SECURITY_ALLOW_EMBEDDING: true
     GF_SECURITY_COOKIE_SAMESITE: grafana
+
+  envFromSecret: "grafana-secret"
   rbac:
     pspEnabled: false
   serviceMonitor:
