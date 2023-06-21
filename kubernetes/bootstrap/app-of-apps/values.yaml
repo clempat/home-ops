@@ -172,3 +172,5 @@ apps:
     path: kubernetes/selfhosted
   - name: grafana
     path: kubernetes/monitoring
+  - name: flaresolver
+    path: kubernetes/networking
