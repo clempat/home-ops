@@ -1,0 +1,54 @@
+---
+app-template:
+  image:
+    repository: ghcr.io/dgtlmoon/changedetection.io
+    tag: "0.42"
+  env:
+    TZ: Europe/Berlin
+    PORT: &port 5000
+    USE_X_SETTINGS: 1
+    PLAYWRIGHT_DRIVER_URL: ws://localhost:3000/?stealth=1&--disable-web-security=true&--user-data-dir=~/browserless-cache-123
+    PUID: 1000
+    PGID: 1000
+  sidecars:
+    browser:
+      name: browser
+      image: docker.io/browserless/chrome:latest@sha256:d28f8cb39c61a2ffc5b4f563d76e3829b1cd054a4439a1eb0202792149a8671d
+      imagePullPolicy: Always
+      env:
+        - name: SCREEN_WIDTH
+          value: "1920"
+        - name: SCREEN_HEIGHT
+          value: "1024"
+        - name: SCREEN_DEPTH
+          value: "16"
+        - name: ENABLE_DEBUGGER
+          value: "false"
+        - name: PREBOOT_CHROME
+          value: "true"
+        - name: CONNECTION_TIMEOUT
+          value: "300000"
+        - name: MAX_CONCURRENT_SESSIONS
+          value: "10"
+        - name: CHROME_REFRESH_TIME
+          value: "600000"
+        - name: DEFAULT_BLOCK_ADS
+          value: "true"
+        - name: DEFAULT_STEALTH
+          value: "true"
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        hajimari.io/icon: mdi:web-sync
+  service:
+    main:
+      ports:
+        http:
+          port: *port
+  persistence:
+    config:
+      enabled: true
+      mountPath: /datastore
+      existingClaim: changedetection-config-v1

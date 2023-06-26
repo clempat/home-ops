@@ -174,3 +174,5 @@ apps:
     path: kubernetes/monitoring
   - name: flaresolver
     path: kubernetes/networking
+  - name: changedetection
+    path: kubernetes/selfhosted
