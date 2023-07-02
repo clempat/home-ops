@@ -5,4 +5,4 @@ version: 0.0.0
 dependencies:
   - name: connect
     version: 1.11.0
-    repository: https://1password.github.io/connect-helm-charts
+    repository: https://raw.githubusercontent.com/1Password/connect-helm-charts/gh-pages/
