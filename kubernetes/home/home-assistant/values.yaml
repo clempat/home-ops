@@ -7,7 +7,7 @@ app-template:
       reloader.stakater.com/auto: "true"
   image:
     repository: homeassistant/home-assistant
-    tag: 2023.6.2
+    tag: 2023.6.3
     pullPolicy: IfNotPresent
   strategy:
     type: Recreate
