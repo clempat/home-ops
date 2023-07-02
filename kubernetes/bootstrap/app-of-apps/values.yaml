@@ -150,6 +150,12 @@ apps:
   #   path: kubernetes/media
   - name: democratic-csi-local
     path: kubernetes/storage
+    ignoreDifferences:
+      - group: storage.k8s.io
+        jsonPointers:
+        - /spec/seLinuxMount
+        kind: CSIDriver
+        name: nfs.csi.k8s.io
   - name: valheim
     path: kubernetes/games
     tailscaleNetwork: "true"
