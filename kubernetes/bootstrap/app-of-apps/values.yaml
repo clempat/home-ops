@@ -182,3 +182,5 @@ apps:
     path: kubernetes/networking
   - name: changedetection
     path: kubernetes/selfhosted
+  - name: readarr
+    path: kubernetes/media

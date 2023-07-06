@@ -1,0 +1,51 @@
+---
+app-template:
+  controller:
+    replicas: 1
+    type: statefulset
+  image:
+    repository: ghcr.io/onedr0p/readarr-develop
+    tag: 0.2.0.1908@sha256:aacf1ccf9c495685ec43eccfb54035049950bf9212ffe1dd2dce69e8b8cfe334
+  env:
+    TZ: Europe/Berlin
+    READARR__INSTANCE_NAME: Readarr
+    READARR__PORT: &port 80
+    READARR__LOG_LEVEL: info
+  service:
+    main:
+      ports:
+        http:
+          port: *port
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: networking-authelia@kubernetescrd
+        hajimari.io/enable: "true"
+        hajimari.io/icon: book-open-variant
+        hajimari.io/appName: Readarr
+        hajimari.io/info: Ebook collection manager for Usenet and BitTorrent users
+  podSecurityContext:
+    runAsUser: 1028
+    runAsGroup: 100
+    fsGroup: 100
+    fsGroupChangePolicy: "OnRootMismatch"
+  persistence:
+    config:
+      enabled: true
+      existingClaim: readarr
+    data:
+      enabled: true
+      type: nfs
+      server: 192.168.30.4
+      path: /mnt/HDD/media
+      mountPath: /data
+  resources:
+    requests:
+      cpu: 10m
+      memory: 250Mi
+    limits:
+      memory: 750Mi
+
