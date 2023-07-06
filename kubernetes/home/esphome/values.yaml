@@ -10,6 +10,9 @@ app-template:
   podAnnotations:
     secret.reloader.stakater.com/reload: esphome-secrets
 
+  hostNetwork: true
+  dnsPolicy: ClusterFirstWithHostNet
+
   service:
     main:
       ports:
