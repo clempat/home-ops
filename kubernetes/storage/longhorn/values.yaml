@@ -5,6 +5,7 @@ longhorn:
   defaultSettings:
     nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
     backupTarget: nfs://192.168.30.4:/mnt/HDD/Backups/Longhorn
+    orphanAutoDeletion: "True"
   longhornManager:
     tolerations:
       - operator: "Exists"
