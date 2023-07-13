@@ -186,5 +186,5 @@ apps:
     path: kubernetes/media
   - name: unpoller
     path: kubernetes/monitoring
-  - name: loki
-    path: kubernetes/monitoring
+  # - name: loki
+  #   path: kubernetes/monitoring
