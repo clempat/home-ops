@@ -1,0 +1,29 @@
+---
+app-template:
+  image:
+    repository: ghcr.io/unpoller/unpoller
+    tag: v2.7.14
+  env:
+    TZ: Europe/Berlin
+    UP_INFLUXDB_DISABLE: true
+  envFrom:
+    - secretRef:
+        name: unpoller-secrets
+  service:
+    main:
+      ports:
+        http:
+          port: 9130
+  serviceMonitor:
+    main:
+      enabled: true
+      endpoints:
+        - port: http
+          scheme: http
+          path: /metrics
+  resources:
+    requests:
+      cpu: 10m
+      memory: 100Mi
+    limits:
+      memory: 500Mi

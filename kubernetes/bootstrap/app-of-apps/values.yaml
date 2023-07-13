@@ -153,7 +153,7 @@ apps:
     ignoreDifferences:
       - group: storage.k8s.io
         jsonPointers:
-        - /spec/seLinuxMount
+          - /spec/seLinuxMount
         kind: CSIDriver
         name: nfs.csi.k8s.io
   - name: valheim
@@ -184,3 +184,7 @@ apps:
     path: kubernetes/selfhosted
   - name: readarr
     path: kubernetes/media
+  - name: unpoller
+    path: kubernetes/monitoring
+  - name: loki
+    path: kubernetes/monitoring
