@@ -5,6 +5,8 @@ app-template:
     replicas: 1
     annotations:
       reloader.stakater.com/auto: "true"
+  nodeSelector:
+    "kubernetes.io/arch": "amd64"
   image:
     repository: homeassistant/home-assistant
     tag: 2023.7.1
