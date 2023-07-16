@@ -1,0 +1,37 @@
+---
+app-template:
+  fullnameOverride: tubearchivist
+  image:
+    repository: bbilly1/tubearchivist
+    tag: v0.3.6
+  service:
+    main:
+      ports:
+        http:
+          port: 8000
+  ingress:
+    main:
+      enabled: true
+  env:
+    TZ: Europe/Berlin
+    HOST_UID: 1000
+    HOST_GID: 1000
+    ENABLE_CAST: "true"
+  persistence:
+    cache:
+      enabled: true
+      type: emptyDir
+      mountPath: /cache
+    media:
+      enabled: true
+      type: nfs
+      server: 192.168.30.4
+      path: /mnt/HDD/media
+      subPath: youtube
+      mountPath: /media
+  podAnnotations:
+    backup.velero.io/backup-volumes: cache,media
+  resources:
+    requests:
+      memory: 1024Mi
+      cpu: 500m

@@ -188,3 +188,5 @@ apps:
     path: kubernetes/monitoring
   # - name: loki
   #   path: kubernetes/monitoring
+  - name: tubearchivist
+    path: kubernetes/media
