@@ -24,6 +24,12 @@ app-template:
         rtsp:
           enabled: true
           port: 8554
+        webrtc:
+          enabled: true
+          port: 8555
+        api:
+          enabled: true
+          port: 1984
   probes:
     liveness: &probes
       enabled: true
