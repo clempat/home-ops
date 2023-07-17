@@ -13,5 +13,10 @@ longhorn:
     tolerations:
       - operator: "Exists"
   longhornRecoveryBackend:
+    replicas: 0
     tolerations:
       - operator: "Exists"
+  longhornAdmissionWebhook:
+    replicas: 0
+  longhornConversionWebhook:
+    replicas: 0
