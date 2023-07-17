@@ -15,5 +15,5 @@ variable "target_node" {
 }
 
 variable "ssh_key" {
-  default = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFV7+yMdRps8qQex9xlYcntTFEJa6q6H7vDhAXYLWjHa clement@tuxedo"
+  default = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPwMKbHTiffsltsF+SN44pDjK3YbyuL6Nst5aY/k3NFU clement@1password"
 }

@@ -9,13 +9,13 @@ resource "proxmox_vm_qemu" "k8s_server" {
   os_type  = "cloud-init"
   cores    = 4
   cpu      = "host"
-  memory   = 16384
+  memory   = 32768
   scsihw   = "virtio-scsi-pci"
   bootdisk = "scsi0"
   onboot   = true
 
   disk {
-    size     = "100G"
+    size     = "150G"
     type     = "scsi"
     storage  = "local-lvm"
     iothread = 1
@@ -52,12 +52,12 @@ resource "proxmox_vm_qemu" "k8s_agent" {
   os_type  = "cloud-init"
   cores    = 2
   cpu      = "host"
-  memory   = 16384
+  memory   = 32768
   scsihw   = "virtio-scsi-pci"
   bootdisk = "scsi0"
 
   disk {
-    size     = "100G"
+    size     = "150G"
     type     = "scsi"
     storage  = "local-lvm"
     iothread = 1
