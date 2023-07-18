@@ -170,8 +170,8 @@ apps:
     path: kubernetes/selfhosted
   - name: syncthing
     path: kubernetes/selfhosted
-  - name: scrypted
-    path: kubernetes/home
+  # - name: scrypted
+  #   path: kubernetes/home
   - name: tailscale
     path: kubernetes/networking
   - name: baserow
