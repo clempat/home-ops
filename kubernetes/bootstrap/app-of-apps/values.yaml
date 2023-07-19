@@ -190,3 +190,5 @@ apps:
   #   path: kubernetes/monitoring
   # - name: tubearchivist
   #   path: kubernetes/media
+  - name: vodafone-station-exporter
+    path: kubernetes/monitoring
