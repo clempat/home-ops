@@ -85,11 +85,11 @@ loki:
   write:
     replicas: 1
     persistence:
-      storageClass: local-path
+      storageClass: longhorn
   backend:
     replicas: 1
     persistence:
-      storageClass: local-path
+      storageClass: longhorn
     extraVolumeMounts:
       - name: rules
         mountPath: /rules/fake
