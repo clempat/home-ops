@@ -1,5 +1,8 @@
 ---
 app-template:
+  controller:
+    annotations:
+      reloader.stakater.com/auto: "true"
   image:
     repository: ghcr.io/clempat/docker-vodafone-station-exporter
     tag: v0.0.2
@@ -20,6 +23,7 @@ app-template:
         - port: http
           scheme: http
           path: /metrics
+          scrapeTimeout: 30s
   resources:
     requests:
       cpu: 10m
