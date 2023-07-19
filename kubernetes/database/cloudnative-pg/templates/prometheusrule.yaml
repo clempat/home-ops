@@ -65,3 +65,15 @@ spec:
           for: 1m
           labels:
             severity: warning
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: postgres-metrics
+  namespace: database
+spec:
+  selector:
+    matchLabels:
+      "cnpg.io/cluster": postgres
+  podMetricsEndpoints:
+  - port: metrics
