@@ -192,3 +192,5 @@ apps:
   #   path: kubernetes/media
   - name: vodafone-station-exporter
     path: kubernetes/monitoring
+  - name: redis
+    path: kubernetes/database
