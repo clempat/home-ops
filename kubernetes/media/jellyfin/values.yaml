@@ -59,6 +59,13 @@ app-template:
       path: /mnt/HDD/media
       mountPath: /data
       readOnly: true
+    photos:
+      enabled: true
+      type: nfs
+      server: 192.168.30.4
+      path: /mnt/HDD/Photos
+      mountPath: /photos
+      readOnly: true
     transcode:
       enabled: true
       type: emptyDir
