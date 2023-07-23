@@ -194,3 +194,6 @@ apps:
     path: kubernetes/monitoring
   - name: redis
     path: kubernetes/database
+  - name: smb-csi
+    path: kubernetes/storage
+
