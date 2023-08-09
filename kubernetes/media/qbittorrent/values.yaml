@@ -28,7 +28,7 @@ app-template:
       ingressClassName: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.middlewares: networking-authelia@kubernetescrd,qbittorrent-qbittorrent@kubernetescrd,qbittorrent-theme@kubernetescrd
+        traefik.ingress.kubernetes.io/router.middlewares: networking-authelia@kubernetescrd,qbittorrent-qbittorrent@kubernetescrd
         hajimari.io/enable: "true"
         hajimari.io/icon: download
         hajimari.io/appName: qBittorrent
