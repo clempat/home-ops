@@ -8,7 +8,7 @@ app-template:
     nameOverride: uptime-kuma
   image:
     repository: louislam/uptime-kuma
-    tag: 1.22.1
+    tag: 1.23.0
   service:
     main:
       ports:
