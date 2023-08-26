@@ -5,7 +5,7 @@ metadata:
   name: nas-smb-storage
 provisioner: smb.csi.k8s.io
 parameters:
-  source: "//192.168.3.4"
+  source: "//192.168.30.4"
   csi.storage.k8s.io/node-stage-secret-name: "smb-secrets"
 reclaimPolicy: Retain
 volumeBindingMode: Immediate
