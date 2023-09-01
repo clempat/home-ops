@@ -13,7 +13,7 @@ app-template:
   sidecars:
     browser:
       name: browser
-      image: docker.io/browserless/chrome:latest@sha256:2bd5e9ef66854d967a8dbc990384bed562c564ee496ce7ca2c924b3b42840065
+      image: docker.io/browserless/chrome:latest@sha256:eeaf02554725c09b3143db5753b1134ee07b0e5106956648432661306276a213
       imagePullPolicy: Always
       env:
         - name: SCREEN_WIDTH
