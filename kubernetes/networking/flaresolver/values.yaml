@@ -2,7 +2,7 @@
 app-template:
   image:
     repository: ghcr.io/flaresolverr/flaresolverr
-    tag: v3.3.2
+    tag: v3.3.4
 
   env:
     TZ: Europe/Berlin
