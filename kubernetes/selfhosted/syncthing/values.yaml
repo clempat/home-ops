@@ -4,7 +4,7 @@ app-template:
     nameOverride: syncthing
   image:
     repository: syncthing/syncthing
-    tag: 1.23.7
+    tag: 1.24.0
 
   podSecurityContext:
     runAsUser: 1003
