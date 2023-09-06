@@ -2,7 +2,7 @@
 app-template:
   image:
     repository: ghcr.io/dgtlmoon/changedetection.io
-    tag: "0.44"
+    tag: "0.45"
   env:
     TZ: Europe/Berlin
     PORT: &port 5000
