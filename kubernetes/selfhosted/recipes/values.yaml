@@ -14,7 +14,7 @@ app-template:
   env:
     TZ: "Europe/Berlin"
     ALLOWED_HOSTS: "*"
-    REVERSE_PROXY_AUTH: 1
+    REMOTE_USER_AUTH: 1
     SOCIAL_PROVIDERS: allauth.socialaccount.providers.openid_connect
   envFrom:
     - secretRef:
