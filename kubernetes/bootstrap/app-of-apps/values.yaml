@@ -50,15 +50,15 @@ apps:
   - name: kube-prometheus-stack
     path: kubernetes/monitoring
     namespace: monitoring
-  - name: emqx
-    path: kubernetes/home
-    namespace: home
-    ignoreDifferences:
-      - group: apps
-        kind: StatefulSet
-        jsonPointers:
-          - /spec/template/volumeClaimTemplates/apiVersion
-          - /spec/template/volumeClaimTemplates/kind
+  # - name: emqx
+  #   path: kubernetes/home
+  #   namespace: home
+  #   ignoreDifferences:
+  #     - group: apps
+  #       kind: StatefulSet
+  #       jsonPointers:
+  #         - /spec/template/volumeClaimTemplates/apiVersion
+  #         - /spec/template/volumeClaimTemplates/kind
   - name: freshrss
     path: kubernetes/selfhosted
   - name: snapshot-controller
@@ -88,15 +88,15 @@ apps:
   - name: k8s-gateway
     path: kubernetes/networking
     namespace: networking
-  - name: home-assistant
-    path: kubernetes/home
-    tailscaleNetwork: "true"
-    ignoreDifferences:
-      - group: apps
-        kind: StatefulSet
-        jsonPointers:
-          - /spec/template/volumeClaimTemplates/apiVersion
-          - /spec/template/volumeClaimTemplates/kind
+  # - name: home-assistant
+  #   path: kubernetes/home
+  #   tailscaleNetwork: "true"
+  #   ignoreDifferences:
+  #     - group: apps
+  #       kind: StatefulSet
+  #       jsonPointers:
+  #         - /spec/template/volumeClaimTemplates/apiVersion
+  #         - /spec/template/volumeClaimTemplates/kind
   - name: node-feature-discovery
     path: kubernetes/system
     namespace: system
@@ -108,14 +108,14 @@ apps:
   #       jsonPointers:
   #         - /spec/template/volumeClaimTemplates/apiVersion
   #         - /spec/template/volumeClaimTemplates/kind
-  - name: zwave-js-ui
-    path: kubernetes/home
-    ignoreDifferences:
-      - group: apps
-        kind: StatefulSet
-        jsonPointers:
-          - /spec/template/volumeClaimTemplates/apiVersion
-          - /spec/template/volumeClaimTemplates/kind
+  # - name: zwave-js-ui
+  #   path: kubernetes/home
+  #   ignoreDifferences:
+  #     - group: apps
+  #       kind: StatefulSet
+  #       jsonPointers:
+  #         - /spec/template/volumeClaimTemplates/apiVersion
+  #         - /spec/template/volumeClaimTemplates/kind
   - name: external-services
     path: kubernetes/networking
   - name: esphome
