@@ -156,9 +156,9 @@ apps:
           - /spec/seLinuxMount
         kind: CSIDriver
         name: nfs.csi.k8s.io
-  - name: valheim
-    path: kubernetes/games
-    tailscaleNetwork: "true"
+  # - name: valheim
+  #   path: kubernetes/games
+  #   tailscaleNetwork: "true"
     # tailscaleNetwork: true
   # - name: rtsptoweb
   #   path: kubernetes/home
