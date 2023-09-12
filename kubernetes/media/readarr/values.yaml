@@ -42,6 +42,18 @@ app-template:
       server: 192.168.30.4
       path: /mnt/HDD/media
       mountPath: /data
+    books:
+      enabled: true
+      type: nfs
+      server: 192.168.30.4
+      path: /mnt/HDD/Books
+      mountPath: /books
+    downloads:
+      enabled: true
+      type: nfs
+      server: 192.168.30.4
+      path: /mnt/HDD/Downloads
+      mountPath: /downloads
   resources:
     requests:
       cpu: 10m

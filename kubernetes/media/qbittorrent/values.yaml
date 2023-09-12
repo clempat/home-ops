@@ -42,6 +42,12 @@ app-template:
     config:
       enabled: true
       existingClaim: qbittorrent
+    downloads:
+      enabled: true
+      type: nfs
+      server: 192.168.30.4
+      path: /mnt/HDD/Downloads
+      mountPath: /downloads
     data:
       enabled: true
       type: nfs
