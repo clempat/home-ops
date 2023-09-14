@@ -59,8 +59,8 @@ apps:
   #       jsonPointers:
   #         - /spec/template/volumeClaimTemplates/apiVersion
   #         - /spec/template/volumeClaimTemplates/kind
-  - name: freshrss
-    path: kubernetes/selfhosted
+  # - name: freshrss
+  #   path: kubernetes/selfhosted
   - name: snapshot-controller
     path: kubernetes/storage
     namespace: storage
@@ -78,13 +78,13 @@ apps:
         kind: Certificate
         jsonPointers:
           - /spec/duration
-  - name: qbittorrent
-    path: kubernetes/media
-  - name: prowlarr
-    path: kubernetes/media
-  - name: theme-park
-    path: kubernetes/selfhosted
-    namespace: selfhosted
+  # - name: qbittorrent
+  #   path: kubernetes/media
+  # - name: prowlarr
+  #   path: kubernetes/media
+  # - name: theme-park
+  #   path: kubernetes/selfhosted
+  #   namespace: selfhosted
   - name: k8s-gateway
     path: kubernetes/networking
     namespace: networking
@@ -118,8 +118,8 @@ apps:
   #         - /spec/template/volumeClaimTemplates/kind
   - name: external-services
     path: kubernetes/networking
-  - name: esphome
-    path: kubernetes/home
+  # - name: esphome
+  #   path: kubernetes/home
   - name: local-storage
     path: kubernetes/storage
   - name: ddns-updater
@@ -128,24 +128,24 @@ apps:
   #   path: kubernetes/selfhosted
   - name: n8n
     path: kubernetes/selfhosted
-  - name: recipes
-    path: kubernetes/selfhosted
+  # - name: recipes
+  #   path: kubernetes/selfhosted
   - name: intel-device-plugins-gpu
     path: kubernetes/system
   - name: intel-device-plugins-operator
     path: kubernetes/system
-  - name: bazarr
-    path: kubernetes/media
-  - name: radarr
-    path: kubernetes/media
-  - name: recyclarr
-    path: kubernetes/media
-  - name: sonarr
-    path: kubernetes/media
-  - name: unpackerr
-    path: kubernetes/media
-  - name: jellyfin
-    path: kubernetes/media
+  # - name: bazarr
+  #   path: kubernetes/media
+  # - name: radarr
+  #   path: kubernetes/media
+  # - name: recyclarr
+  #   path: kubernetes/media
+  # - name: sonarr
+  #   path: kubernetes/media
+  # - name: unpackerr
+  #   path: kubernetes/media
+  # - name: jellyfin
+  #   path: kubernetes/media
   # - name: jellyseer
   #   path: kubernetes/media
   - name: democratic-csi-local
@@ -162,28 +162,28 @@ apps:
     # tailscaleNetwork: true
   # - name: rtsptoweb
   #   path: kubernetes/home
-  - name: rss-bridge
-    path: kubernetes/selfhosted
-  - name: frigate
-    path: kubernetes/home
-  - name: uptime-kuma
-    path: kubernetes/selfhosted
+  # - name: rss-bridge
+  #   path: kubernetes/selfhosted
+  # - name: frigate
+  #   path: kubernetes/home
+  # - name: uptime-kuma
+  #   path: kubernetes/selfhosted
   - name: syncthing
     path: kubernetes/selfhosted
   # - name: scrypted
   #   path: kubernetes/home
   - name: tailscale
     path: kubernetes/networking
-  - name: baserow
-    path: kubernetes/selfhosted
+  # - name: baserow
+  #   path: kubernetes/selfhosted
   - name: grafana
     path: kubernetes/monitoring
-  - name: flaresolver
-    path: kubernetes/networking
+  # - name: flaresolver
+  #   path: kubernetes/networking
   - name: changedetection
     path: kubernetes/selfhosted
-  - name: readarr
-    path: kubernetes/media
+  # - name: readarr
+  #   path: kubernetes/media
   - name: unpoller
     path: kubernetes/monitoring
   # - name: loki
