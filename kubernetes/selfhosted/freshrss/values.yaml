@@ -3,7 +3,7 @@ app-template:
   image:
     repository: freshrss/freshrss
     pullPolicy: IfNotPresent
-    tag: 1.21.0
+    tag: 1.23.1
   strategy:
     type: Recreate
   nodeSelector:
