@@ -4,5 +4,5 @@ name: onepassword-connect
 version: 0.0.0
 dependencies:
   - name: connect
-    version: 1.14.0
+    version: 1.15.0
     repository: https://raw.githubusercontent.com/1Password/connect-helm-charts/gh-pages/
