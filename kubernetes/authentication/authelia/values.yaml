@@ -6,7 +6,7 @@ app-template:
     type: statefulset
   image:
     repository: ghcr.io/authelia/authelia
-    tag: 4.37.5
+    tag: 4.38.8
   args: ["--config", "/config/config.yaml"]
   env:
     TZ: Europe/Berlin
