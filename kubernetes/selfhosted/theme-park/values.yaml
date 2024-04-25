@@ -4,7 +4,7 @@ app-template:
     strategy: RollingUpdate
   image:
     repository: ghcr.io/onedr0p/theme-park
-    tag: 1.13.11@sha256:c561b03451c8c536371d6d347a4e9c95c227671d69e31dd16c401fee1dc8cdbe
+    tag: 1.16.2@sha256:e90d483b3ca41920cae4466f06ccdb9d3cf0e44e656653f63e286da277a8db9e
   service:
     main:
       ports:
