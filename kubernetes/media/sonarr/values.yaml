@@ -5,7 +5,7 @@ app-template:
     type: statefulset
   image:
     repository: ghcr.io/onedr0p/sonarr-develop
-    tag: 4.0.0.657
+    tag: 4.0.4.1616
   env:
     TZ: Europe/Berlin
     SONARR__INSTANCE_NAME: Sonarr
